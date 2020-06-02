@@ -1,5 +1,5 @@
 <?php
-$servername = "mysql3.gear.host"; //ikut je
+$servername = "den1.mysql1.gear.host"; //ikut je
 $username = "akifcarwash"; //ikut je
 $password = "#FadhliAfandi98"; //ikut je
 $dbname = "akifcarwash"; //nama database
