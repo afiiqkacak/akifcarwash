@@ -86,13 +86,16 @@ $tar= date("Y-m-d");?>
 			
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link active" href="index.php">Queue <i class="fa fa-car" aria-hidden="true"></i></a>
+					<a class="nav-link active" href="index.php">Queue <i class="fa fa-hand-paper-o" aria-hidden="true"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="services.php">Services <i class="fa fa-wrench" aria-hidden="true"></i></a>
+					<a class="nav-link" href="services.php">Service <i class="fa fa-wrench" aria-hidden="true"></i></a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="customer.php">Customer <i class="fa fa-id-card-o" aria-hidden="true"></i></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="car.php">Car <i class="fa fa-car" aria-hidden="true"></i></a>
 				</li>
 <!-- 				<li class="nav-item dropdown ml-md-auto">
 					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Dropdown link</a>

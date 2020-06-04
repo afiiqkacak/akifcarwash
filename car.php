@@ -52,12 +52,6 @@ include('connection/connect.php');
   background: #dff0d8;
 }
 
-.unstyled-button {
-  border: none;
-  padding: 0;
-  background: none;
-}
-
 </style>
 
 
@@ -98,11 +92,13 @@ $tar= date("Y-m-d");?>
 					<a class="nav-link" href="services.php">Service <i class="fa fa-wrench" aria-hidden="true"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="customer.php">Customer <i class="fa fa-id-card-o" aria-hidden="true"></i></a>
+					<a class="nav-link" href="customer.php">Customer <i class="fa fa-id-card-o" aria-hidden="true"></i></a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="car.php">Car <i class="fa fa-car" aria-hidden="true"></i></a>
+					<a class="nav-link active" href="car.php">Car <i class="fa fa-car" aria-hidden="true"></i></a>
 				</li>
+
+
 <!-- 				<li class="nav-item dropdown ml-md-auto">
 					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Dropdown link</a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
@@ -120,41 +116,63 @@ $tar= date("Y-m-d");?>
 			<form action="" method="post" role="form">
 				<div class="form-group">
 					 
-					<label for="name">
-						Name: <span style="color:red;">*</span>
+					<label for="plate">
+						Plate Number: <span style="color:red;">*</span>
 					</label>
-					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="name" type="text" maxlength="50" required>
+					
+					 <input class="form-control" name="plate" type="text" maxlength="20" required>
 
-					 <label for="phone">
-						Phone Number: <span style="color:red;">*</span>
+					 <label for="model">
+						Car Model:
 					</label>
-					<input class="form-control" name="phone" type="number" min="0" required>
+					
+					 <input class="form-control" name="model" type="text" maxlength="20">
 
-					<label for="address">
-						Address:
+					 <label for="colour">
+						Car Colour:
 					</label>
-					<textarea class="form-control" name="address" maxlength="150" ></textarea>
+					
+					 <input class="form-control" name="colour" type="text" maxlength="15">
+					 </div>
 
-				</div>
-				<!-- <div class="form-group">
 					 
-					<label for="exampleInputPassword1">
-						Password
-					</label>
-					<input type="password" class="form-control" id="exampleInputPassword1">
-				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputFile">
-						File input
-					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile">
-					<p class="help-block">
-						Example block-level help text here.
-					</p>
-				</div> -->
+
 				
+				
+				<div class="checkbox">
+					<label for="category">Car Category: <span style="color:red;">*</span></label>
+  <select class="form-control" name="category" required>
+  	<option></option>
+    <option value="1">Small</option>
+    <option value="2">Medium</option>
+    <option value="3">Large</option>
+
+  </select>
+
+
+				<label for="name">Owner: <span style="color:red;">*</span></label>
+  <select class="form-control" data-live-search="true" name="name" required>
+					 	<option></option>
+					 	<?php
+					 $sql2="SELECT * FROM customer";
+					 $result2 = mysqli_query($connect, $sql2);
+					if (mysqli_num_rows($result2)) 
+					{
+						while($row2 = mysqli_fetch_array($result2)) 
+						{					
+					 ?>
+    <option value="<?php echo $row2['customer_id'];?>"><?php echo $row2['name'];?></option>
+<?php
+		}
+	
+	}
+?>
+					 	
+					 	</select><br><br>
+  
+				
+					
+				</div> 
 				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
 				</button>
 				
@@ -169,18 +187,21 @@ $tar= date("Y-m-d");?>
 				<thead>
 					<tr>
 						<th>
-							Name
-						</th>
-						<th>
-							Phone Number
-						</th>
-						<th>
-							Address
-						</th>
-						<th>
 							Plate Number
 						</th>
-						<th style="text-align:center" colspan="2">
+						<th>
+							Car Model
+						</th>
+						<th>
+							Car Colour
+						</th>
+						<th>
+							Car Category
+						</th>
+						<th>
+							Owner
+						</th>
+						<th style="text-align:center">
 							Action
 						</th>
 					</tr>
@@ -188,12 +209,11 @@ $tar= date("Y-m-d");?>
 				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT customer.customer_id, customer.name, customer.phone_number, customer.address, GROUP_CONCAT(car.plate_num SEPARATOR'<br>') AS plate 
-FROM customer
-LEFT JOIN car
-ON customer.customer_id = car.customer_id
-GROUP BY customer.customer_id
-ORDER BY customer.name";
+		  $sql = "SELECT car.car_id, car.plate_num, car.car_model, car.car_colour, car_category.category_of_car, customer.name
+FROM car
+JOIN car_category JOIN customer
+WHERE car.customer_id = customer.customer_id AND car.car_category_id = car_category.car_category_id
+ORDER BY plate_num";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
@@ -205,32 +225,29 @@ ORDER BY customer.name";
 					
 
 						<td>
+							<?php echo $row['plate_num'];?>
+						</td>
+						<td>
+							<?php echo $row['car_model'];?>
+						</td>
+						<td>
+							<?php echo $row['car_colour'];?>
+						</td>
+						<td>
+							<?php echo $row['category_of_car'];?>
+						</td>
+						<td>
 							<?php echo $row['name'];?>
 						</td>
 
-						<td>
-							<form action="updatecustomer.php" method="post">
-							<input name="customer_id" autofocus class="input" type="hidden" value="<?php echo $row['customer_id']; ?>">
-							<input class="form-control" name="phone" type="number" min="0" value="<?php echo $row['phone_number'];?>">
-						</td>
-						<td>
-							<textarea class="form-control" name="address" maxlength="150"><?php echo $row['address'];?></textarea>
-						</td>
-						<td>
-							<?php echo $row['plate'];?>
-						</td>
+					<td style="text-align:center">
+					<a href="deletecar.php?carid=<?php echo $row['car_id'];?>" 
+					onclick="return confirm('Delete from services?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
+						</button>
 
-						<td style="text-align:right">
-						<button class="unstyled-button" style="color: blue;" name="submit"><i class="fa fa-check" aria-hidden="true"></i></button></td></form>
-
-					<td style="text-align:left">
-					<a href="deletecustomer.php?customerid=<?php echo $row['customer_id'];?>" 
-					onclick="return confirm('Delete from customer?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
-						</a></td>
-
-					
+						<!-- <a href="update.php?queue_id=<?php //echo $row['queue_id'];?>"><i class="fa fa-window-close" aria-hidden="true"></i> --></td>
 				</tr>
-				
+				</form>
 				<?php
 				}
 					}
@@ -245,23 +262,33 @@ ORDER BY customer.name";
 <?php
 
 if(isset($_POST['submit'])){
-	$service=$_POST['name'];
-	$type=$_POST['phone'];
-	$address=$_POST['address'];
+	$plate=$_POST['plate'];
+	$model=$_POST['model'];
+	$colour=$_POST['colour'];
+	$category=$_POST['category'];
+	$name=$_POST['name'];
+
+	// echo $plate;
+	// echo $model;
+	// echo $colour;
+	// echo $category;
+	// echo $name;
+
+
 
 	
-	$sql = "INSERT INTO `customer`(`name`, `phone_number`, `address`) VALUES ('$service','$type', '$address')";
+	$sql = "INSERT INTO `car`(`plate_num`, `car_model`, `car_colour`, `car_category_id`, `customer_id`) VALUES ('$plate','$model','$colour','$category','$name')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){
 				echo '<script language="javascript">';
-				echo 'alert("Customer added.");';
-				echo 'window.location.href="customer.php";';
+				echo 'alert("Car added.");';
+				echo 'window.location.href="car.php";';
 				echo '</script>';
 			}else{
 				echo '<script language="javascript">';
 				echo 'alert("Data is already present! Avoid duplicate entry.");';
-				echo 'window.location.href="customer.php";';
+				echo 'window.location.href="car.php";';
 				echo '</script>';
 			}
 
