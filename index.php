@@ -112,7 +112,7 @@ $tar= date("Y-m-d");?>
 				<div class="form-group">
 					 
 					<label for="platenum">
-						Plate Number:
+						Plate Number: <span style="color:red;">*</span>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
 					 <select class="form-control" data-live-search="true" name="platenum" required>
@@ -155,7 +155,7 @@ WHERE car.car_id=queue.car_id AND date='$tar')";
 					</p>
 				</div> -->
 				<div class="checkbox">
-				<label for="service">Select Service(s):</label>
+				<label for="service">Select Service(s): <span style="color:red;">*</span></label>
   <select class="form-control" multiple data-live-search="true" name="service[]" required>
      <?php
 					 $sql="select * from service ORDER BY type ASC, service_id";

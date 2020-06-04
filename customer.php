@@ -52,6 +52,12 @@ include('connection/connect.php');
   background: #dff0d8;
 }
 
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
+}
+
 </style>
 
 
@@ -111,11 +117,21 @@ $tar= date("Y-m-d");?>
 			<form action="" method="post" role="form">
 				<div class="form-group">
 					 
-					<label for="service">
-						Service:
+					<label for="name">
+						Name: <span style="color:red;">*</span>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="service" type="text" required>
+					 <input class="form-control" name="name" type="text" maxlength="50" required>
+
+					 <label for="phone">
+						Phone Number: <span style="color:red;">*</span>
+					</label>
+					<input class="form-control" name="phone" type="number" min="0" required>
+
+					<label for="address">
+						Address:
+					</label>
+					<textarea class="form-control" name="address" maxlength="150" ></textarea>
 
 				</div>
 				<!-- <div class="form-group">
@@ -135,17 +151,7 @@ $tar= date("Y-m-d");?>
 						Example block-level help text here.
 					</p>
 				</div> -->
-				<div class="checkbox">
-				<label for="type">Service Type:</label>
-  <select class="form-control" name="type" required>
-    <option value="Exterior">Exterior</option>
-    <option value="Interior">Interior</option>
-
-  </select><br><br>
-  
 				
-					
-				</div> 
 				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
 				</button>
 				
@@ -160,20 +166,31 @@ $tar= date("Y-m-d");?>
 				<thead>
 					<tr>
 						<th>
-							Service
+							Name
 						</th>
 						<th>
-							Type
+							Phone Number
 						</th>
-						<th style="text-align:center">
+						<th>
+							Address
+						</th>
+						<th>
+							Car(s) Plate Number
+						</th>
+						<th style="text-align:center" colspan="2">
 							Action
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-active">
+				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT * FROM `service` ORDER BY type ASC";
+		  $sql = "SELECT customer.customer_id, customer.name, customer.phone_number, customer.address, GROUP_CONCAT(car.plate_num SEPARATOR'<br>') AS plate 
+FROM customer
+LEFT JOIN car
+ON customer.customer_id = car.customer_id
+GROUP BY customer.customer_id
+ORDER BY customer.name";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
@@ -185,20 +202,32 @@ $tar= date("Y-m-d");?>
 					
 
 						<td>
-							<?php echo $row['service_type'];?>
+							<?php echo $row['name'];?>
+						</td>
+
+						<td>
+							<form action="updatecustomer.php" method="post">
+							<input name="customer_id" autofocus class="input" type="hidden" value="<?php echo $row['customer_id']; ?>">
+							<input class="form-control" name="phone" type="number" min="0" value="<?php echo $row['phone_number'];?>">
 						</td>
 						<td>
-							<?php echo $row['type'];?>
+							<textarea class="form-control" name="address" maxlength="150"><?php echo $row['address'];?></textarea>
+						</td>
+						<td>
+							<?php echo $row['plate'];?>
 						</td>
 
-					<td style="text-align:center">
-					<a href="deleteservice.php?serviceid=<?php echo $row['service_id'];?>" 
-					onclick="return confirm('Delete from services?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
-						</button>
+						<td style="text-align:right">
+						<button class="unstyled-button" style="color: blue;" name="submit"><i class="fa fa-check" aria-hidden="true"></i></button></td></form>
 
-						<!-- <a href="update.php?queue_id=<?php //echo $row['queue_id'];?>"><i class="fa fa-window-close" aria-hidden="true"></i> --></td>
+					<td style="text-align:left">
+					<a href="deletecustomer.php?customerid=<?php echo $row['customer_id'];?>" 
+					onclick="return confirm('Delete from customer?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
+						</a></td>
+
+					
 				</tr>
-				</form>
+				
 				<?php
 				}
 					}
@@ -213,25 +242,23 @@ $tar= date("Y-m-d");?>
 <?php
 
 if(isset($_POST['submit'])){
-	$service=$_POST['service'];
-	$type=$_POST['type'];
-
-	echo $service;
-	echo $type;
+	$service=$_POST['name'];
+	$type=$_POST['phone'];
+	$address=$_POST['address'];
 
 	
-	$sql = "INSERT INTO `service`(`service_type`, `type`) VALUES ('$service','$type')";
+	$sql = "INSERT INTO `customer`(`name`, `phone_number`, `address`) VALUES ('$service','$type', '$address')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){
 				echo '<script language="javascript">';
-				echo 'alert("Service added!");';
-				echo 'window.location.href="services.php";';
+				echo 'alert("Customer added.");';
+				echo 'window.location.href="customer.php";';
 				echo '</script>';
 			}else{
 				echo '<script language="javascript">';
 				echo 'alert("Data is already present! Avoid duplicate entry.");';
-				echo 'window.location.href="services.php";';
+				echo 'window.location.href="customer.php";';
 				echo '</script>';
 			}
 

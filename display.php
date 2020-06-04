@@ -222,7 +222,7 @@ window.addEventListener('load', function()
             // Set current data text
             dataDiv.innerHTML = xhr.responseText;
             // Update the live data every 1 sec
-            setTimeout(updateLiveData(), 1000);
+            setTimeout(updateLiveData(), 10000);
         }
     }
 });

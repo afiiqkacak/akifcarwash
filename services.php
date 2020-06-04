@@ -112,10 +112,10 @@ $tar= date("Y-m-d");?>
 				<div class="form-group">
 					 
 					<label for="service">
-						Service:
+						Service: <span style="color:red;">*</span>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="service" type="text" required>
+					 <input class="form-control" name="service" type="text" maxlength="50" required>
 
 				</div>
 				<!-- <div class="form-group">
@@ -136,7 +136,7 @@ $tar= date("Y-m-d");?>
 					</p>
 				</div> -->
 				<div class="checkbox">
-				<label for="type">Service Type:</label>
+				<label for="type">Service Type: <span style="color:red;">*</span></label>
   <select class="form-control" name="type" required>
     <option value="Exterior">Exterior</option>
     <option value="Interior">Interior</option>
@@ -170,7 +170,7 @@ $tar= date("Y-m-d");?>
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-active">
+				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
 		  $sql = "SELECT * FROM `service` ORDER BY type ASC";
@@ -216,8 +216,7 @@ if(isset($_POST['submit'])){
 	$service=$_POST['service'];
 	$type=$_POST['type'];
 
-	echo $service;
-	echo $type;
+
 
 	
 	$sql = "INSERT INTO `service`(`service_type`, `type`) VALUES ('$service','$type')";
@@ -225,7 +224,7 @@ if(isset($_POST['submit'])){
 
 	if($result == TRUE){
 				echo '<script language="javascript">';
-				echo 'alert("Service added!");';
+				echo 'alert("Service added.");';
 				echo 'window.location.href="services.php";';
 				echo '</script>';
 			}else{
