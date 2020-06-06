@@ -103,14 +103,14 @@ $tar= date("Y-m-d");?>
 				<li class="nav-item">
 					<a class="nav-link" href="car.php">Car <i class="fa fa-car" aria-hidden="true"></i></a>
 				</li>
-<!-- 				<li class="nav-item dropdown ml-md-auto">
-					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown">Dropdown link</a>
+				<li class="nav-item dropdown ml-md-auto">
+					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
 						 <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
 						<div class="dropdown-divider">
-						</div> <a class="dropdown-item" href="#">Separated link</a>
+						</div> <a class="dropdown-item" href="#">Log Out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
 					</div>
-				</li> -->
+				</li>
 			</ul>
 		</div>
 	</div>

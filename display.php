@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-<?php
-include('connection/connect.php');
-?>
+
   <head>
   	<!-- <meta http-equiv="refresh" content="1"/> -->
     <meta charset="utf-8">
@@ -29,9 +27,11 @@ libs/jquery/1.3.0/jquery.min.js"></script> -->
 <script type="text/javascript" src="reloader.js"></script>
 
 <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
+
 </head>
 
-<div id="liveData">
+<!-- <div id="liveData"> -->
     <div class="container-fluid">
 	<div class="row" style="background-image: linear-gradient(to bottom right, #4fdce0,#9ad5fc );">
 		<div class="col-md-12">
@@ -72,30 +72,9 @@ $tar= date("Y-m-d");?>
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-danger">
-					<tr>
-						<?php
-						$tar= date("Y-m-d");
-		  			$sql = "SELECT car.plate_num 
-					FROM car INNER JOIN queue 
-					WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Queuing' ORDER BY status DESC, queue_id ASC";
-					$result = mysqli_query($connect,$sql);
-					$x = 1;
-					if(mysqli_num_rows($result) > 0 )
-					{
-					while($row = mysqli_fetch_array($result))
-					{
-
-						?>
-						<td style="text-align:center">
-							<?php echo $row['plate_num'];?>
-						</td>
-					</tr>
-					<?php
-				}
-			}
-			?>
+				<tbody class="table-danger" id="liveData3">
 				</tbody>
+				
 			</table>
 		</div>
 		<div class="col-md-4">
@@ -107,31 +86,15 @@ $tar= date("Y-m-d");?>
 						</th>
 					</tr>
 				</thead>
-				<tbody  class="table-active">
+				<tbody class="table-active" id="liveData2">
 					<tr>
-						<?php
-						$tar= date("Y-m-d");
-		  			$sql = "SELECT car.plate_num 
-					FROM car INNER JOIN queue 
-					WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='In Progress' ORDER BY status DESC, queue_id ASC";
-					$result = mysqli_query($connect,$sql);
-					$x = 1;
-					if(mysqli_num_rows($result) > 0 )
-					{
-					while($row = mysqli_fetch_array($result))
-					{
 
-						?>
 						<td style="text-align:center">
-							<?php echo $row['plate_num'];?>
 						</td>
 					</tr>
-					<?php
-				}
-			}
-			?>
 				</tbody>
 			</table>
+
 		</div>
 
 		<div class="col-md-4">
@@ -142,30 +105,14 @@ $tar= date("Y-m-d");?>
 							Completed <i class="fa fa-check-square-o" aria-hidden="true"></i>
 						</th>
 					</tr>
+					
 				</thead>
-				<tbody class="table-warning">
+				<tbody class="table-warning" id="liveData">
 					<tr>
-						<?php
-						$tar= date("Y-m-d");
-		  			$sql = "SELECT car.plate_num 
-					FROM car INNER JOIN queue 
-					WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' ORDER BY status DESC, queue_id ASC";
-					$result = mysqli_query($connect,$sql);
-					$x = 1;
-					if(mysqli_num_rows($result) > 0 )
-					{
-					while($row = mysqli_fetch_array($result))
-					{
 
-						?>
 						<td style="text-align:center">
-							<?php echo $row['plate_num'];?>
 						</td>
 					</tr>
-					<?php
-				}
-			}
-			?>
 				</tbody>
 			</table>
 		</div>
@@ -180,7 +127,7 @@ $tar= date("Y-m-d");?>
 		</div>
 	</div>
 </div>
-</div>
+<!-- </div> -->
 
 <script>
 window.addEventListener('load', function()
@@ -202,7 +149,7 @@ window.addEventListener('load', function()
         var now = new Date();
         // Date string is appended as a query with live data 
         // for not to use the cached version 
-        var url = 'display.php?' + now.getTime();
+        var url = 'complete.php?' + now.getTime();
         xhr = getXmlHttpRequestObject();
         xhr.onreadystatechange = evenHandler;
         // asynchronous requests
@@ -227,4 +174,95 @@ window.addEventListener('load', function()
     }
 });
 
+
+window.addEventListener('load', function()
+{
+    var xhr2 = null;
+
+    getXmlHttpRequestObject2 = function()
+    {
+        if(!xhr2)
+        {               
+            // Create a new XMLHttpRequest object 
+            xhr2 = new XMLHttpRequest();
+        }
+        return xhr2;
+    };
+
+    updateLiveData2 = function()
+    {
+        var now2 = new Date();
+        // Date string is appended as a query with live data 
+        // for not to use the cached version 
+        var url2 = 'progress.php?' + now2.getTime();
+        xhr2 = getXmlHttpRequestObject2();
+        xhr2.onreadystatechange = evenHandler2;
+        // asynchronous requests
+        xhr2.open("GET", url2, true);
+        // Send the request over the network
+        xhr2.send(null);
+    };
+
+    updateLiveData2();
+
+    function evenHandler2()
+    {
+        // Check response is ready or not
+        if(xhr2.readyState == 4 && xhr2.status == 200)
+        {
+            dataDiv = document.getElementById('liveData2');
+            // Set current data text
+            dataDiv.innerHTML = xhr2.responseText;
+            // Update the live data every 1 sec
+            setTimeout(updateLiveData2(), 10000);
+        }
+    }
+});
+
+window.addEventListener('load', function()
+{
+    var xhr3 = null;
+
+    getXmlHttpRequestObject3 = function()
+    {
+        if(!xhr3)
+        {               
+            // Create a new XMLHttpRequest object 
+            xhr3 = new XMLHttpRequest();
+        }
+        return xhr3;
+    };
+
+    updateLiveData3 = function()
+    {
+        var now3 = new Date();
+        // Date string is appended as a query with live data 
+        // for not to use the cached version 
+        var url3 = 'q.php?' + now3.getTime();
+        xhr3 = getXmlHttpRequestObject3();
+        xhr3.onreadystatechange = evenHandler3;
+        // asynchronous requests
+        xhr3.open("GET", url3, true);
+        // Send the request over the network
+        xhr3.send(null);
+    };
+
+    updateLiveData3();
+
+    function evenHandler3()
+    {
+        // Check response is ready or not
+        if(xhr3.readyState == 4 && xhr3.status == 200)
+        {
+            dataDiv = document.getElementById('liveData3');
+            // Set current data text
+            dataDiv.innerHTML = xhr3.responseText;
+            // Update the live data every 1 sec
+            setTimeout(updateLiveData3(), 10000);
+        }
+    }
+});
+
 </script>
+
+

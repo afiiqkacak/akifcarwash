@@ -242,7 +242,7 @@ ORDER BY plate_num";
 
 					<td style="text-align:center">
 					<a href="deletecar.php?carid=<?php echo $row['car_id'];?>" 
-					onclick="return confirm('Delete from services?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
+					onclick="return confirm('Delete from car?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
 						</button>
 
 						<!-- <a href="update.php?queue_id=<?php //echo $row['queue_id'];?>"><i class="fa fa-window-close" aria-hidden="true"></i> --></td>

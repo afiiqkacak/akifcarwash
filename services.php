@@ -179,7 +179,7 @@ $tar= date("Y-m-d");?>
 				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT * FROM `service` ORDER BY type ASC";
+		  $sql = "select * from service ORDER BY type ASC, service_id";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
@@ -199,7 +199,7 @@ $tar= date("Y-m-d");?>
 
 					<td style="text-align:center">
 					<a href="deleteservice.php?serviceid=<?php echo $row['service_id'];?>" 
-					onclick="return confirm('Delete from services?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
+					onclick="return confirm('Delete from service?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
 						</button>
 
 						<!-- <a href="update.php?queue_id=<?php //echo $row['queue_id'];?>"><i class="fa fa-window-close" aria-hidden="true"></i> --></td>
