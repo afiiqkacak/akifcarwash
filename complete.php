@@ -12,15 +12,14 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 					WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' ORDER BY status DESC, queue_id ASC";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
+
 					if(mysqli_num_rows($result) > 0 )
 					{
-						
+						echo '<audio src="bell.mp3" autoplay controls></audio>';
 
 					while($row = mysqli_fetch_array($result))
 					{
-					
-
-						//echo '<audio src="bell.mp3" autoplay></audio>'
+	
 
 						?>
 						<td style="text-align:center">
@@ -29,7 +28,9 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 					</tr>
 					<?php
 				}
+
 			}
 			?>
 				</tbody>
+
 
