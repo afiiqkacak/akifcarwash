@@ -54,6 +54,7 @@ $tar= date("Y-m-d");?>
 
 
 </h4>
+<marquee class="marquee" scrollamount="10"><h5>It's our pleasure to extend a cheerful welcome to you all! Your presence makes us very happy!</h5></marquee>
 
 
 <br>
