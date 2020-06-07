@@ -139,9 +139,7 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 						{
 							//echo $row['plate_num'];
 								$sample = $row['plate'];
-								$samplenum = "$sample";
-								$sampleint = (int)$samplenum;
-								echo $sampleint;
+								echo $sample;
 			
 					
 						}
@@ -170,9 +168,7 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 						{
 							//echo $row['plate_num'];
 							$check = $row['plate'];
-							$checknum = "$check";
-							$checkint = (int)$checknum;
-							echo $checkint;
+							echo $check;
 			
 					
 						}
