@@ -182,7 +182,7 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 
 			<?php
 				if ($check > $sample){
-					echo '<audio src="bell.mp3" controls autoplay></audio>';
+					echo 'true';
 				}
 			?>
 
