@@ -139,7 +139,8 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 						{
 							//echo $row['plate_num'];
 								$sample = $row['plate'];
-								echo $sample;
+								$sampleint = json_decode('[' . $sample . ']', true);
+								echo $sampleint;
 			
 					
 						}
@@ -168,7 +169,8 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 						{
 							//echo $row['plate_num'];
 							$check = $row['plate'];
-							echo $check;
+							$checkint = json_decode('[' . $check . ']', true);
+							echo $checkint;
 			
 					
 						}
@@ -181,7 +183,7 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 		<div class="col-md-12" id="sound">
 
 			<?php
-				if ($check > $sample){
+				if ($checkint > $sampleint){
 					echo 'true';
 				}
 			?>
