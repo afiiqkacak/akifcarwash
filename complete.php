@@ -20,7 +20,7 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 					while($row = mysqli_fetch_array($result))
 					{
 	
-
+echo '<audio src="bell.mp3" autoplay></audio>';
 						?>
 						<td style="text-align:center">
 							<?php echo $row['plate_num'];?>
