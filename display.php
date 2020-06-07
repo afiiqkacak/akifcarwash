@@ -181,7 +181,7 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 		<div class="col-md-12" id="sound">
 
 			<?php
-				if ($check == $sample){
+				if ($check > $sample){
 					echo '<audio src="bell.mp3" controls autoplay></audio>';
 				}
 			?>
@@ -330,7 +330,7 @@ window.addEventListener('load', function()
 
 
 <script type="text/javascript">
-    setInterval("my_function();",30000); 
+    setInterval("my_function();",40000); 
     function my_function(){
       $('#sample').load(location.href + ' #sample');
     }
