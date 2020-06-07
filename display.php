@@ -19,7 +19,7 @@
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 <!-- <script type="text/javascript" src="http://ajax.googleapis.com/ajax/
@@ -27,6 +27,7 @@ libs/jquery/1.3.0/jquery.min.js"></script> -->
 <script type="text/javascript" src="reloader.js"></script>
 
 <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+
 
 
 </head>
@@ -51,7 +52,6 @@ $timenow = date("g:i a", time());
 <?php echo $timenow;
 $tar= date("Y-m-d");
 ?>
-
 
 
 
@@ -121,11 +121,71 @@ $tar= date("Y-m-d");
 	</div>
 	<div class="row">
 
-		<div class="col-md-12">
+		<div class="col-md-12" id="sample">
+
+				<?php
+				include('connection/connect.php');
+				$sql = "SELECT COUNT(car.plate_num) AS plate 
+FROM car INNER JOIN queue 
+WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' ORDER BY status DESC, queue_id ASC";
+				$result = mysqli_query($connect,$sql);
+				if(mysqli_num_rows($result) > 0 )
+					{
+					
+					// echo '<audio src="bell.mp3" autoplay></audio>';
+
+
+					while($row = mysqli_fetch_array($result))
+						{
+							//echo $row['plate_num'];
+								$sample = $row['plate'];
+								echo $sample;
+			
+					
+						}
+			
+
+					}
+			?>
+
+
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12" id="check">
+<?php
+				$sql = "SELECT COUNT(car.plate_num) AS plate 
+FROM car INNER JOIN queue 
+WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' ORDER BY status DESC, queue_id ASC";
+				$result = mysqli_query($connect,$sql);
+				if(mysqli_num_rows($result) > 0 )
+					{
+					
+					// echo '<audio src="bell.mp3" autoplay></audio>';
+
+
+					while($row = mysqli_fetch_array($result))
+						{
+							//echo $row['plate_num'];
+							$check = $row['plate'];
+							echo $check;
+			
+					
+						}
+			
+
+					}
+			?>
+
+		</div>
+		<div class="col-md-12" id="sound">
+
+			<?php
+				if ($check > $sample){
+					echo '<audio src="bell.mp3" controls autoplay></audio>';
+				}
+			?>
+
 		</div>
 	</div>
 </div>
@@ -265,6 +325,27 @@ window.addEventListener('load', function()
     }
 });
 
+
 </script>
 
 
+<script type="text/javascript">
+    setInterval("my_function();",30000); 
+    function my_function(){
+      $('#sample').load(location.href + ' #sample');
+    }
+  </script>
+
+ <script type="text/javascript">
+    setInterval("my_function2();",5000); 
+    function my_function2(){
+      $('#check').load(location.href + ' #check');
+    }
+ </script>
+
+ <script type="text/javascript">
+    setInterval("my_function3();",5000); 
+    function my_function3(){
+      $('#sound').load(location.href + ' #sound');
+    }
+ </script>
