@@ -330,7 +330,7 @@ window.addEventListener('load', function()
 
 
 <script type="text/javascript">
-    setInterval("my_function();",40000); 
+    setInterval("my_function();",120000); 
     function my_function(){
       $('#sample').load(location.href + ' #sample');
     }
