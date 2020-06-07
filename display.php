@@ -139,7 +139,8 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 						{
 							//echo $row['plate_num'];
 								$sample = $row['plate'];
-								$sampleint = json_decode('[' . $sample . ']', true);
+								$samplenum = "$sample";
+								$sampleint = (int)$samplenum;
 								echo $sampleint;
 			
 					
@@ -169,7 +170,8 @@ WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='Completed' 
 						{
 							//echo $row['plate_num'];
 							$check = $row['plate'];
-							$checkint = json_decode('[' . $check . ']', true);
+							$checknum = "$check";
+							$checkint = (int)$checknum;
 							echo $checkint;
 			
 					
