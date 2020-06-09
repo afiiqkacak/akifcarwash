@@ -19,11 +19,11 @@ GROUP BY category_of_car
 ORDER BY frequency DESC";
 $result2 = mysqli_query($connect,$sql2) or die (mysqli_error($connect));
 
-$sql3 = 'SELECT service_type, COUNT(service_type) AS total
+$sql3 = "SELECT service_type, COUNT(service_type) AS total
 FROM queue_service INNER JOIN service INNER JOIN queue
-WHERE queue_service.queue_id=queue.queue_id AND service.service_id=queue_service.service_id AND date LIKE "$tar"
+WHERE queue_service.queue_id=queue.queue_id AND service.service_id=queue_service.service_id AND date LIKE '$tar'
 GROUP BY service_type
-ORDER BY total DESC';
+ORDER BY total DESC";
 $result3 = mysqli_query($connect,$sql3) or die (mysqli_error($connect));
 
 $sql4 = "SELECT category_of_car AS kereta, DATE_FORMAT(SEC_TO_TIME(AVG(TIME_TO_SEC(TIMEDIFF(completed_time,arrival_time)))),'%H:%i') AS avgtime
