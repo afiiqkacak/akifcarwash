@@ -21,7 +21,7 @@ $result2 = mysqli_query($connect,$sql2) or die (mysqli_error($connect));
 
 $sql3 = "SELECT service_type, COUNT(service_type) AS total
 FROM queue_service INNER JOIN service INNER JOIN queue
-WHERE queue_service.queue_id=queue.queue_id AND service.service_id=queue_service.service_id AND date='2020-06-09'
+WHERE queue_service.queue_id=queue.queue_id AND service.service_id=queue_service.service_id AND date=CURDATE()
 GROUP BY service_type
 ORDER BY total DESC";
 $result3 = mysqli_query($connect,$sql3) or die (mysqli_error($connect));
@@ -34,7 +34,7 @@ $result4 = mysqli_query($connect,$sql4) or die (mysqli_error($connect));
 
 $sql5 = "SELECT DATE_FORMAT(arrival_time, '%H') AS time, COUNT(queue_id) AS jumlah
 FROM `queue`
-WHERE date='2020-06-09'
+WHERE date=CURDATE()
 GROUP BY time";
 $result5 = mysqli_query($connect,$sql5) or die (mysqli_error($connect));
 ?>
