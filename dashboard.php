@@ -220,7 +220,8 @@ function drawBackgroundColor() {
       data.addColumn('number', 'Cars');
 
       data.addRows([
-           <?php
+	      [0, 0],
+	      <?php
 					
 				 	while($row5 = mysqli_fetch_assoc($result5))
 					{
