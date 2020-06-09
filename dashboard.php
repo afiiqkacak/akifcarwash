@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
+date_default_timezone_set('Asia/Kuala_Lumpur');
 $tar= date("Y-m-d");
 include('connection/connect.php');
 $sql = "SELECT *, COUNT(service_type) AS frequency
