@@ -304,7 +304,7 @@ $tar= date("Y-m-d");?>
 		</div>
 	</div>
 	<br>
-	<div class="row" style="overflow-y:auto;height: 500px">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-4" id="piechart" style="width: 600px; height: 250px;">
