@@ -236,10 +236,12 @@ function drawBackgroundColor() {
       var options = {
       	title: "Today's Cars",
         hAxis: {
-          title: 'Time (H)'
+          title: 'Time (H)',
+		minValue: 0
         },
         vAxis: {
-          title: 'Cars'
+          title: 'Cars',
+		minValue: 0
         },
         backgroundColor: ''
       };
