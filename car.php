@@ -16,7 +16,7 @@ include('connection/connect.php');
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-   <!--  <link rel="icon" href="shop.png" type="image/gif" sizes="16x16"> -->
+    <link rel="icon" href="akif.png" type="image/gif">
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
