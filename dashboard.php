@@ -51,7 +51,7 @@ $result5 = mysqli_query($connect,$sql5) or die (mysqli_error($connect));
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-   <link rel="icon" href="akif.png" type="image/gif">
+    <link rel="icon" href="akif.png" type="image/gif">
 
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
@@ -220,8 +220,7 @@ function drawBackgroundColor() {
       data.addColumn('number', 'Cars');
 
       data.addRows([
-	      [0, 0],
-	      <?php
+           <?php
 					
 				 	while($row5 = mysqli_fetch_assoc($result5))
 					{
@@ -236,12 +235,10 @@ function drawBackgroundColor() {
       var options = {
       	title: "Today's Cars",
         hAxis: {
-          title: 'Time (H)',
-		minValue: 0
+          title: 'Time (H)'
         },
         vAxis: {
-          title: 'Cars',
-		minValue: 0
+          title: 'Cars'
         },
         backgroundColor: ''
       };
@@ -307,7 +304,7 @@ $tar= date("Y-m-d");?>
 		</div>
 	</div>
 	<br>
-	<div class="row">
+	<div class="row" style="overflow-y:auto;height: 500px">
 		<div class="col-md-12">
 			<div class="row">
 				<div class="col-md-4" id="piechart" style="width: 600px; height: 250px;">
