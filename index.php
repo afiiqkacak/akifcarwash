@@ -1,7 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-include('connection/connect.php');
+
+session_start();
+	
+	if(isset($_SESSION["staff_id"])){
+			$user = $_SESSION["staff_id"];
+	}else{
+		header('Location: loginpage.php');
+	}
+	 include('connection/connect.php');
+
+
 ?>
   <head>
 <!--   	<meta http-equiv="refresh" content="5"/> -->
@@ -86,27 +96,28 @@ $tar= date("Y-m-d");?>
 			
 			<ul class="nav nav-tabs">
 				<li class="nav-item">
-					<a class="nav-link" href="dashboard.php">Dashboard <i class="fa fa-tachometer" aria-hidden="true"></i></a>
+					<a class="nav-link" href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="index.php">Queue <i class="fa fa-hand-paper-o" aria-hidden="true"></i></a>
+					<a class="nav-link active" href="index.php"><i class="fa fa-hand-paper-o" aria-hidden="true"></i> Queue</a>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link" href="customer.php">Customer <i class="fa fa-id-card-o" aria-hidden="true"></i></a>
+					<a class="nav-link" href="customer.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Customer</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="car.php">Car <i class="fa fa-car" aria-hidden="true"></i></a>
+					<a class="nav-link" href="car.php"><i class="fa fa-car" aria-hidden="true"></i> Car</a>
 				</li>
-<li class="nav-item">
-					<a class="nav-link" href="services.php">Service <i class="fa fa-wrench" aria-hidden="true"></i></a>
+				<li class="nav-item">
+					<a class="nav-link" href="services.php"><i class="fa fa-wrench" aria-hidden="true"></i> Service</a>
 				</li>
+
 				<li class="nav-item dropdown ml-md-auto">
-					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i></a>
+					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i> <?php echo $_SESSION ['name']; ?></a>
 					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-						 <a class="dropdown-item" href="#">Action</a> <a class="dropdown-item" href="#">Another action</a> <a class="dropdown-item" href="#">Something else here</a>
+						 <a class="dropdown-item" href="staff.php"><i class="fa fa-user-o" aria-hidden="true"></i> Staff</a> 
 						<div class="dropdown-divider">
-						</div> <a class="dropdown-item" href="#">Log Out <i class="fa fa-sign-out" aria-hidden="true"></i></a>
+						</div> <a class="dropdown-item" href="logout.php" onClick="return confirm('Are you sure?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
 					</div>
 				</li>
 			</ul>
