@@ -8,7 +8,7 @@ if (mysqli_num_rows($result2)) {
 
 	// $masa=$row2['completed_time'];
 	$memasa = strtotime('$masa');
-	echo date('H:i', $memasa);
+	echo date('G:i', $memasa);
 	// $memasa=$masa("H:i");
 	// echo $memasa;
 	echo '\n';
