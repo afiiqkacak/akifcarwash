@@ -11,7 +11,7 @@ if (mysqli_num_rows($result2)) {
 	$time=date("H:i");
 
 		if ($masa == $time){
-				echo "<audio src='bell.mp3' autoplay></audio>";
+				echo "<audio src='bell.mp3' autoplay hidden></audio>";
 		}else{
 		}
 }

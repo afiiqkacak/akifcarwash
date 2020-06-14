@@ -133,7 +133,6 @@ $tar= date("Y-m-d");
 	<div class="row">
 
 		<div class="col-md-12" id="divToRefresh">
-Running...
 				
 		</div>
 	</div>
