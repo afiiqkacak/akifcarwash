@@ -6,12 +6,10 @@ if (mysqli_num_rows($result2)) {
 	while($row2 = mysqli_fetch_array($result2)) {
 
 	$masa=$row2['completed_time'];
-	$parsed = date_parse($masa);
-	$seconds = $parsed['hour'] * 3600 + $parsed['minute'] * 60 + $parsed['second'];
-	echo $seconds;
+	echo $masa;
 	echo '\n';
 
-	$time=time();
+	$time=time("H:i:s");
 	echo $time;
 	}
 
