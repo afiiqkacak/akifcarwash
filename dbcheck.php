@@ -11,7 +11,8 @@ if (mysqli_num_rows($result2)) {
 
 }
 else{
-echo "Listening...";
+	$time=time();
+echo "$time";
 }
 }
 ?>
