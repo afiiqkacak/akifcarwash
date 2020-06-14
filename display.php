@@ -28,6 +28,17 @@ libs/jquery/1.3.0/jquery.min.js"></script> -->
 
 <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+<script type="text/javascript">// <![CDATA[
+$(document).ready(function() {
+$.ajaxSetup({ cache: false }); // This part addresses an IE bug. without it, IE will only load the first number and will never refresh
+setInterval(function() {
+$('#divToRefresh').load('dbcheck.php');
+}, 10000); // refers to the time to refresh the div. it is in milliseconds.
+});
+// ]]></script>
+
 
 
 </head>
@@ -121,8 +132,8 @@ $tar= date("Y-m-d");
 	</div>
 	<div class="row">
 
-		<div class="col-md-12" id="sample">
-
+		<div class="col-md-12" id="divToRefresh">
+Running...
 				
 		</div>
 	</div>
