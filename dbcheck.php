@@ -3,9 +3,9 @@ include('connection/connect.php');
 $sql3 = "SELECT * FROM queue ORDER BY queue_id DESC LIMIT 1";
 $result2 = mysqli_query($connect, $sql3);
 if (mysqli_num_rows($result2)) {
-	$masa=$result3['completed_time'];
+	$masa=$result2['completed_time'];
 	echo $masa;
-	
+
 	$time=time();
 	echo "$time";
 
