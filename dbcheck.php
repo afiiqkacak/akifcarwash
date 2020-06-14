@@ -7,17 +7,17 @@ if (mysqli_num_rows($result2)) {
 	while($row2 = mysqli_fetch_array($result2)) {
 
 	$masa=$row2['masa'];
-	echo $masa;
+	// echo $masa;
 	// $memasa=$masa("H:i");
 	// echo $memasa;
-	echo '\n';
+	// echo '\n';
 
 	$time=date("H:i");
-	echo $time;
+	// echo $time;
 
 	// $timestampCheck = $time - 120;
 		if ($masa == $time){
-				echo "<audio src='bell.mp3' controls autoplay></audio>";
+				echo "<audio src='bell.mp3' autoplay></audio>";
 		}else{
 			echo "listening";
 		}
