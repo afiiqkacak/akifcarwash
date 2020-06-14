@@ -16,11 +16,11 @@ if (mysqli_num_rows($result2)) {
 	echo $time;
 
 	// $timestampCheck = $time - 120;
-	// 	if ($masa >= $timestampCheck){
-	// 			echo "<audio src='bell.mp3' controls autoplay></audio>";
-	// }else{
-	// 	echo "listening";
-	// }
+		if ($masa == $time){
+				echo "<audio src='bell.mp3' controls autoplay></audio>";
+		}else{
+			echo "listening";
+		}
 }
 
 	
