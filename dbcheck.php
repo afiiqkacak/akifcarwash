@@ -10,7 +10,7 @@ if (mysqli_num_rows($result2)) {
 	// echo $masa;
 	// echo '\n';
 
-	// $time=date("H:i:s");
+	$time=date("H:i:s");
 	// echo $time;
 
 	$timestampCheck = $time - 120;
