@@ -1,4 +1,5 @@
 <?php
+date_default_timezone_set('Asia/Kuala_Lumpur');
 include('connection/connect.php');
 $sql3 = "SELECT * FROM queue ORDER BY queue_id DESC LIMIT 1";
 $result2 = mysqli_query($connect, $sql3);
@@ -9,7 +10,7 @@ if (mysqli_num_rows($result2)) {
 	echo $masa;
 	echo '\n';
 
-	$time=time("H:i:s");
+	$time=date("H:i:s");
 	echo $time;
 	}
 
