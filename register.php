@@ -68,7 +68,7 @@
 
   </head>
   <body>
-
+<div class="limiter">
 <div class="container-login100" style="background-image: url('shining-car.jpg');">
 <div class="row" >
 
@@ -104,7 +104,7 @@
 
 </body>
 
-</div>
+</div></div>
 <?php
 include('connection/connect.php');
 if(isset($_POST['submit'])){
