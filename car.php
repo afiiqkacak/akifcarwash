@@ -144,7 +144,7 @@ $tar= date("Y-m-d");?>
 						Plate Number: <span style="color:red;">*</span>
 					</label>
 					
-					 <input class="form-control" name="plate" type="text" maxlength="20" required>
+					 <input class="form-control" name="plate" type="text" maxlength="20" id="someInput" placeholder="eg: W 1908 Q" required>
 
 					 <label for="model">
 						Car Model:
@@ -326,6 +326,12 @@ if(isset($_POST['submit'])){
     <script src="js/scripts.js"></script> -->
     <script>
     	$('select').selectpicker();
+    </script>
+    <script>
+var someInput = document.querySelector('#someInput');
+someInput.addEventListener('input', function () {
+    someInput.value = someInput.value.toUpperCase();
+});
     </script>
 
   </body>

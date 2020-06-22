@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <?php
-
+$session_lifetime = 3600 * 24 * 2; // 2 days
+session_set_cookie_params ($session_lifetime);
 session_start();
+
 	
 	if(isset($_SESSION["staff_id"])){
 			$user = $_SESSION["staff_id"];
@@ -151,11 +153,14 @@ $tar= date("Y-m-d");?>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
 					 <input class="form-control" name="name" type="text" maxlength="50" required>
-
+					<label for="ic">
+						IC Number: <span style="color:red;">*</span>
+					</label>
+					<input class="form-control" name="ic" type="number" min="0" placeholder="eg: 950101305451" required>
 					 <label for="phone">
 						Phone Number: <span style="color:red;">*</span>
 					</label>
-					<input class="form-control" name="phone" type="number" min="0" required>
+					<input class="form-control" name="phone" type="number" min="0" placeholder="eg: 0123456789" required>
 
 					<label for="address">
 						Address:
@@ -198,6 +203,9 @@ $tar= date("Y-m-d");?>
 							Name
 						</th>
 						<th>
+							IC Number
+						</th>
+						<th>
 							Phone Number
 						</th>
 						<th>
@@ -214,7 +222,7 @@ $tar= date("Y-m-d");?>
 				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT customer.customer_id, customer.name, customer.phone_number, customer.address, GROUP_CONCAT(car.plate_num SEPARATOR'<br>') AS plate 
+		  $sql = "SELECT customer.customer_id, customer.name, customer.ic, customer.phone_number, customer.address, GROUP_CONCAT(car.plate_num SEPARATOR'<br>') AS plate 
 FROM customer
 LEFT JOIN car
 ON customer.customer_id = car.customer_id
@@ -232,6 +240,9 @@ ORDER BY customer.name";
 
 						<td>
 							<?php echo $row['name'];?>
+						</td>
+						<td>
+							<?php echo $row['ic'];?>
 						</td>
 
 						<td>
@@ -272,11 +283,12 @@ ORDER BY customer.name";
 
 if(isset($_POST['submit'])){
 	$service=$_POST['name'];
+	$ic=$_POST['ic'];
 	$type=$_POST['phone'];
 	$address=$_POST['address'];
 
 	
-	$sql = "INSERT INTO `customer`(`name`, `phone_number`, `address`) VALUES ('$service','$type', '$address')";
+	$sql = "INSERT INTO `customer`(`name`, `ic`, `phone_number`, `address`) VALUES ('$service', '$ic', '$type', '$address')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){

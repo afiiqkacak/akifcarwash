@@ -2,6 +2,8 @@
 <html lang="en">
 <?php
 
+$session_lifetime = 3600 * 24 * 2; // 2 days
+session_set_cookie_params ($session_lifetime);
 session_start();
 	
 	if(isset($_SESSION["staff_id"])){
@@ -109,7 +111,7 @@ $tar= date("Y-m-d");?>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link active" href="customer.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Customer</a>
+					<a class="nav-link" href="customer.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Customer</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="car.php"><i class="fa fa-car" aria-hidden="true"></i> Car</a>
@@ -154,12 +156,12 @@ $tar= date("Y-m-d");?>
 					 <label for="ic">
 						IC Number: <span style="color:red;">*</span>
 					</label>
-					<input class="form-control" name="ic" type="number" min="0" required>
+					<input class="form-control" name="ic" type="number" min="0" placeholder="eg: 950101305451" required>
 
 					 <label for="phone">
 						Phone Number: <span style="color:red;">*</span>
 					</label>
-					<input class="form-control" name="phone" type="number" min="0" required>
+					<input class="form-control" name="phone" type="number" placeholder="eg: 0123456789" min="0" required>
 
 					<label for="address">
 						Address:
@@ -234,7 +236,7 @@ $tar= date("Y-m-d");?>
 		$tar= date("Y-m-d");
 		  $sql = "SELECT * 
 FROM staff
-";
+ORDER BY name";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
