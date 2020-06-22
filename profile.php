@@ -37,6 +37,8 @@ session_start();
 
 <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
+
+
 <style>
 	.foo {
   float: left;
@@ -85,6 +87,7 @@ session_start();
 				<h1>
 					<small>CAR 'Q'</small>
 				</h1>
+
 <?php
 date_default_timezone_set('Asia/Kuala_Lumpur');
 $datenow = date("l, d F Y");
@@ -109,7 +112,7 @@ $tar= date("Y-m-d");?>
 				</li>
 				
 				<li class="nav-item">
-					<a class="nav-link active" href="customer.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Customer</a>
+					<a class="nav-link" href="customer.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Customer</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link" href="car.php"><i class="fa fa-car" aria-hidden="true"></i> Car</a>
@@ -141,61 +144,17 @@ $tar= date("Y-m-d");?>
 		</div>
 	</div>
 	<br>
+
 	<div class="row">
-		<div class="col-md-4">
-			<form action="" method="post" role="form">
-				<div class="form-group">
-					 
-					<label for="name">
-						Name: <span style="color:red;">*</span>
-					</label>
-					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="name" type="text" maxlength="50" required>
-
-					 <label for="phone">
-						Phone Number: <span style="color:red;">*</span>
-					</label>
-					<input class="form-control" name="phone" type="number" min="0" required>
-
-					<label for="address">
-						Address:
-					</label>
-					<textarea class="form-control" name="address" maxlength="150" ></textarea>
-
-				</div>
-				<!-- <div class="form-group">
-					 
-					<label for="exampleInputPassword1">
-						Password
-					</label>
-					<input type="password" class="form-control" id="exampleInputPassword1">
-				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputFile">
-						File input
-					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile">
-					<p class="help-block">
-						Example block-level help text here.
-					</p>
-				</div> -->
-				
-				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</button>
-				
-			</form>
-			<br>
-
-		</div>
-
-		<div class="col-md-8" style="overflow-y:auto;height: 500px">
-			
+		<div class="col-md-12">
 			<table class="table table-striped table-hover">
 				<thead>
 					<tr>
 						<th>
 							Name
+						</th>
+						<th>
+							IC Number
 						</th>
 						<th>
 							Phone Number
@@ -204,9 +163,9 @@ $tar= date("Y-m-d");?>
 							Address
 						</th>
 						<th>
-							Plate Number
+							Role
 						</th>
-						<th style="text-align:center" colspan="2">
+						<th style="text-align:center">
 							Action
 						</th>
 					</tr>
@@ -214,12 +173,7 @@ $tar= date("Y-m-d");?>
 				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT customer.customer_id, customer.name, customer.phone_number, customer.address, GROUP_CONCAT(car.plate_num SEPARATOR'<br>') AS plate 
-FROM customer
-LEFT JOIN car
-ON customer.customer_id = car.customer_id
-GROUP BY customer.customer_id
-ORDER BY customer.name";
+		  $sql = "select * from staff WHERE staff_id = '$user'";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
@@ -233,30 +187,24 @@ ORDER BY customer.name";
 						<td>
 							<?php echo $row['name'];?>
 						</td>
-
 						<td>
-							<form action="updatecustomer.php" method="post">
-							<input name="customer_id" autofocus class="input" type="hidden" value="<?php echo $row['customer_id']; ?>">
+							<?php echo $row['ic'];?>
+						</td>
+						<td>
+							<form action="" method="post">
+							<input name="staffid" class="input" type="hidden" value="<?php echo $row['staff_id']; ?>">
 							<input class="form-control" name="phone" type="number" min="0" value="<?php echo $row['phone_number'];?>">
 						</td>
 						<td>
 							<textarea class="form-control" name="address" maxlength="150"><?php echo $row['address'];?></textarea>
 						</td>
 						<td>
-							<?php echo $row['plate'];?>
+							<?php echo $row['role'];?>
 						</td>
 
-						<td style="text-align:right">
+					<td style="text-align:center">
 						<button class="unstyled-button" style="color: blue;" name="submit"><i class="fa fa-check" aria-hidden="true"></i></button></td></form>
-
-					<td style="text-align:left">
-					<a href="deletecustomer.php?customerid=<?php echo $row['customer_id'];?>" 
-					onclick="return confirm('Delete from customer?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
-						</a></td>
-
-					
 				</tr>
-				
 				<?php
 				}
 					}
@@ -267,33 +215,33 @@ ORDER BY customer.name";
 			</table>
 		</div>
 	</div>
-</div>
+
 <?php
 
 if(isset($_POST['submit'])){
-	$service=$_POST['name'];
-	$type=$_POST['phone'];
-	$address=$_POST['address'];
+	$phone = $_POST['phone'];
+	$address = $_POST['address'];
+	$id = $_POST['staffid'];
 
-	
-	$sql = "INSERT INTO `customer`(`name`, `phone_number`, `address`) VALUES ('$service','$type', '$address')";
-	$result = mysqli_query($connect, $sql);
+	if($result == TRUE){	
+	$sql = "UPDATE `staff` SET `phone_number`='$phone',`address`='$address' WHERE staff_id='$id'";
+	 	mysqli_query($connect, $sql);
+	 	echo '<script language="javascript">';
+	 	echo 'alert("Profile updated.");';
+	 	echo 'window.location.href="profile.php";';
+	 	echo '</script>';
 
-	if($result == TRUE){
-				echo '<script language="javascript">';
-				echo 'alert("Customer added.");';
-				echo 'window.location.href="customer.php";';
-				echo '</script>';
-			}else{
-				echo '<script language="javascript">';
-				echo 'alert("Data is already present! Avoid duplicate entry.");';
-				echo 'window.location.href="customer.php";';
-				echo '</script>';
-			}
 
-			mysqli_close($connect);
+
+	 }else{
+	 	echo '<script language="javascript">';
+	 	echo 'alert("Failed to update.");';
+		echo 'window.location.href="profile.php";';
+		echo '</script>';
+	 		}
 
 }
+	 		mysqli_close($connect);
 ?>
 
 <!--     <script src="js/jquery.min.js"></script>

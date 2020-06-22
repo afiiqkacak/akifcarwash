@@ -64,6 +64,7 @@ include('connection/connect.php');
 						$_SESSION ['address'] = $row ["address"];
 						$_SESSION ['role'] = $row ["role"];
 						$_SESSION ['phone_number'] = $row ["phone_number"];
+						$_SESSION ['password'] = $row ["password"];
 		
 						echo "<script>alert('Login Success!');</script>";
 						echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";

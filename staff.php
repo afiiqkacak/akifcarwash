@@ -151,6 +151,10 @@ $tar= date("Y-m-d");?>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
 					 <input class="form-control" name="name" type="text" maxlength="50" required>
+					 <label for="ic">
+						IC Number: <span style="color:red;">*</span>
+					</label>
+					<input class="form-control" name="ic" type="number" min="0" required>
 
 					 <label for="phone">
 						Phone Number: <span style="color:red;">*</span>
@@ -161,6 +165,13 @@ $tar= date("Y-m-d");?>
 						Address:
 					</label>
 					<textarea class="form-control" name="address" maxlength="150" ></textarea>
+					<label for="role">Role: <span style="color:red;">*</span></label>
+  <select class="form-control" name="role" required>
+  	<option></option>
+    <option value="Admin">Admin</option>
+    <option value="Staff">Staff</option>
+
+  </select>
 
 				</div>
 				<!-- <div class="form-group">
@@ -198,14 +209,21 @@ $tar= date("Y-m-d");?>
 							Name
 						</th>
 						<th>
+							IC Number
+						</th>
+						<th>
+							Password
+						</th>
+						<th>
+							Role
+						</th>
+						<th>
 							Phone Number
 						</th>
 						<th>
 							Address
 						</th>
-						<th>
-							Plate Number
-						</th>
+						
 						<th style="text-align:center" colspan="2">
 							Action
 						</th>
@@ -214,12 +232,9 @@ $tar= date("Y-m-d");?>
 				<tbody class="table-warning">
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT customer.customer_id, customer.name, customer.phone_number, customer.address, GROUP_CONCAT(car.plate_num SEPARATOR'<br>') AS plate 
-FROM customer
-LEFT JOIN car
-ON customer.customer_id = car.customer_id
-GROUP BY customer.customer_id
-ORDER BY customer.name";
+		  $sql = "SELECT * 
+FROM staff
+";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
@@ -233,25 +248,49 @@ ORDER BY customer.name";
 						<td>
 							<?php echo $row['name'];?>
 						</td>
+						<td>
+							<?php echo $row['ic'];?>
+						</td>
+						<td>
+							<?php echo $row['password'];?>
+						</td>
+						<td>
+							<form action="updatestaff.php" method="post">
+							<input name="staff_id" autofocus class="input" type="hidden" value="<?php echo $row['staff_id']; ?>">
+							<select class="form-control" name="role">
+							<option><?php echo $row['role'];?></option>
+							<?php
+							if ($row['role'] == "Admin"){
+							?>
+							<option value="Staff">Staff</option>
+							<?php
+	        		  }else{
+	        		  	?>
+	        		  	<option value="Admin">Admin</option>
+	        		  	<?php
+							}
+							?>
+							
+						</td>
 
 						<td>
-							<form action="updatecustomer.php" method="post">
-							<input name="customer_id" autofocus class="input" type="hidden" value="<?php echo $row['customer_id']; ?>">
+
+							
+							
 							<input class="form-control" name="phone" type="number" min="0" value="<?php echo $row['phone_number'];?>">
 						</td>
 						<td>
 							<textarea class="form-control" name="address" maxlength="150"><?php echo $row['address'];?></textarea>
 						</td>
-						<td>
-							<?php echo $row['plate'];?>
-						</td>
+						
+
 
 						<td style="text-align:right">
 						<button class="unstyled-button" style="color: blue;" name="submit"><i class="fa fa-check" aria-hidden="true"></i></button></td></form>
 
 					<td style="text-align:left">
-					<a href="deletecustomer.php?customerid=<?php echo $row['customer_id'];?>" 
-					onclick="return confirm('Delete from customer?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
+					<a href="deletestaff.php?staffid=<?php echo $row['staff_id'];?>" 
+					onclick="return confirm('Delete from staff?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
 						</a></td>
 
 					
@@ -271,23 +310,25 @@ ORDER BY customer.name";
 <?php
 
 if(isset($_POST['submit'])){
-	$service=$_POST['name'];
-	$type=$_POST['phone'];
+	$name=$_POST['name'];
+	$ic=$_POST['ic'];
+	$phone=$_POST['phone'];
 	$address=$_POST['address'];
+	$role=$_POST['role'];
 
 	
-	$sql = "INSERT INTO `customer`(`name`, `phone_number`, `address`) VALUES ('$service','$type', '$address')";
+	$sql = "INSERT INTO `staff`(`ic`, `name`, `address`, `role`, `phone_number`) VALUES ('$ic','$name','$address','$role','$phone_number')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){
 				echo '<script language="javascript">';
-				echo 'alert("Customer added.");';
-				echo 'window.location.href="customer.php";';
+				echo 'alert("Staff added.");';
+				echo 'window.location.href="staff.php";';
 				echo '</script>';
 			}else{
 				echo '<script language="javascript">';
 				echo 'alert("Data is already present! Avoid duplicate entry.");';
-				echo 'window.location.href="customer.php";';
+				echo 'window.location.href="staff.php";';
 				echo '</script>';
 			}
 
