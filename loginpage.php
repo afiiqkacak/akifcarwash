@@ -36,7 +36,8 @@
 							
 						
 					</div>
-
+					<div  style="text-align: center;">
+					<a href="forget.php">Forgot Password</a></i></div>
 				</form>
 			</div>
 		</div>
@@ -67,17 +68,28 @@ include('connection/connect.php');
 						$_SESSION ['role'] = $row ["role"];
 						$_SESSION ['phone_number'] = $row ["phone_number"];
 						$_SESSION ['password'] = $row ["password"];
-		
-						echo "<script>alert('Login Success!');</script>";
+						$_SESSION ['question'] = $row ["question"];
+						echo "<script>alert('Welcome ".$_SESSION ['name']."!');</script>";
 						echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
-
+						if ($_SESSION ['password'] == '123'){
+							echo "<script>alert('You are currently using the default password. Please change it ASAP.');</script>";
+							echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+							if($_SESSION ['question'] == NULL){
+							echo "<script>alert('Please update your security question.');</script>";
+							echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+							}
+						}elseif($_SESSION ['question'] == NULL){
+							echo "<script>alert('Please update your security question.');</script>";
+							echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
 						}
+
+					}
 					}else{
 						echo "<script>alert('Wrong IC or password.');</script>";
 						echo "<meta http-equiv='refresh' content='0; url=loginpage.php'/>";
-					}
 
-				}
+						}		
+			}
 
 ?>
 

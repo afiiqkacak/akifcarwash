@@ -322,6 +322,13 @@ $tar= date("Y-m-d");?>
 						}
 						?>
 						<a class="dropdown-item" href="password.php"><i class="fa fa-key" aria-hidden="true"></i> Change Password</a>
+						<?php
+						if ($_SESSION ['question']==NULL){
+						?>
+						<a class="dropdown-item" href="question.php"><i class="fa fa-lock" aria-hidden="true"></i> Security Question</a>
+						<?php
+					}
+					?>
 						<div class="dropdown-divider">
 						</div> <a class="dropdown-item" href="logout.php" onClick="return confirm('Are you sure?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
 					</div>

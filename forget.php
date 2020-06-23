@@ -75,62 +75,68 @@
 				<div class="wrap-login100 p-t-30 p-b-50">
 					<form action="" method="post">
 						<div class="form-group">
-							 <span style="margin:auto; display:table; font-weight:bold; color: red;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> NOTICE: You are only required to fill in this form ONCE. If you have did this in the past, please proceed to the counter.</span><br>
-							<label for="name" style="color:white;">
-						Name: <span style="color:red;">*</span>
-					</label>
-					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="name" type="text" maxlength="50" required>
+							 <span style="margin:auto; display:table; font-weight:bold; color: red;"><i class="fa fa-exclamation-circle" aria-hidden="true"></i> NOTICE: Your password will be reseted to default password IF you manage to answer the security question correctly.</span><br>
 					<label for="ic" style="color:white;">
 						IC Number: <span style="color:red;">*</span>
 					</label>
 					<input class="form-control" name="ic" type="number" min="0" placeholder="eg: 950101305451" required>
-					 <label for="phone" style="color:white;">
-						Phone Number: <span style="color:red;">*</span>
+					<label for="ic" style="color:white;">
+						What was the name of the hospital that you were born? (Case-sensitive) <span style="color:red;">*</span>
 					</label>
-					<input class="form-control" name="phone" type="number" min="0" placeholder="eg: 0123456789" required>
-
-					<label for="address" style="color:white;">
-						Address:
-					</label>
-					<textarea class="form-control" name="address" maxlength="150" ></textarea>
+					<input class="form-control" name="question" type="text" maxlength="50" required>
+					 
 						</div>
-						<button type="submit" name="submit" class="btn btn-info">Submit <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</button>
+						<button type="submit" onclick="location.href='loginpage.php';" class="btn btn-danger">Cancel <i class="fa fa-ban" aria-hidden="true"></i>
+
+						</button>
+						<button type="submit" name="submit" class="btn btn-info">Reset Password <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+
+						</button>
+				
 					</form>
 				</div>
-			</div>
-			
-
-</body>
-
-</div></div>
-<?php
+			</div></body>
+			<?php
 include('connection/connect.php');
 if(isset($_POST['submit'])){
-	$service=$_POST['name'];
 	$ic=$_POST['ic'];
-	$type=$_POST['phone'];
-	$address=$_POST['address'];
+	$question=$_POST['question'];
+
+
+	$sql1 = "SELECT question FROM `staff` WHERE ic='$ic'";
+	$execute1=mysqli_query($connect, $sql1) or die (mysqli_error($connect));
+	$row = mysqli_fetch_assoc($execute1);
+	$soklan = $row ["question"];
+
+			if($question == $soklan){
+				$sql = "UPDATE `staff` SET `password`='123' WHERE `ic`='$ic'";
+				$result = mysqli_query($connect, $sql);
+
+					if(mysqli_affected_rows($connect) >0 ){
+						echo '<script language="javascript">';
+						echo 'alert("Password reseted to default. Please change your password once you have logged in.");';
+						echo 'window.location.href="loginpage.php";';
+						echo '</script>';
+					}
+						echo '<script language="javascript">';
+						echo 'alert("You are currently using the default password.");';
+						echo 'window.location.href="loginpage.php";';
+						echo '</script>';
+
+			}else{
+						echo '<script language="javascript">';
+						echo 'alert("Unable to reset password. Make sure your IC number and security answer is correct.");';
+						echo 'window.location.href="forget.php";';
+						echo '</script>';
+
+			}
+		}
+
 
 	
-	$sql = "INSERT INTO `customer`(`name`, `ic`, `phone_number`, `address`) VALUES ('$service', '$ic', '$type', '$address')";
-	$result = mysqli_query($connect, $sql);
+	
+	
 
-	if($result == TRUE){
-				echo '<script language="javascript">';
-				echo 'alert("Details added. Please proceed to the counter.");';
-				echo 'window.location.href="register.php";';
-				echo '</script>';
-			}else{
-				echo '<script language="javascript">';
-				echo 'alert("Data is already present! Avoid duplicate entry.");';
-				echo 'window.location.href="register.php";';
-				echo '</script>';
-			}
 
-			mysqli_close($connect);
-
-}
 ?>
 </html>

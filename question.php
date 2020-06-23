@@ -13,6 +13,34 @@ session_start();
 	}
 	 include('connection/connect.php');
 
+	 $pass = $_SESSION ["password"];
+
+  if (isset ($_POST['submit'])){
+    $user = $_SESSION['staff_id'];
+    $question = $_POST['question'];
+     
+    
+  $sql = "UPDATE staff 
+          SET question = '$question' 
+          WHERE staff_id = '$user'";
+    
+  $execute = mysqli_query ($connect,$sql) or die (mysqli_error ($connect));
+  if(mysqli_affected_rows($connect) >0 ){
+  $_SESSION ['question'] = $question;
+  echo "<script>alert('Security question updated.');</script>";
+  echo "<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+  
+  }
+
+  else{
+      echo "<script>alert('Enter a valid location.');</script>";
+      echo "<meta http-equiv='refresh' content='0; url=question.php'/>";
+
+  }
+}
+
+  mysqli_close ($connect);
+
 
 ?>
   <head>
@@ -39,6 +67,9 @@ session_start();
 
 <link rel="stylesheet" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 
+
+
+
 <style>
 	.foo {
   float: left;
@@ -62,6 +93,12 @@ session_start();
 
 .collected {
   background: #dff0d8;
+}
+
+.unstyled-button {
+  border: none;
+  padding: 0;
+  background: none;
 }
 
 </style>
@@ -112,7 +149,7 @@ $tar= date("Y-m-d");?>
 					<a class="nav-link" href="car.php"><i class="fa fa-car" aria-hidden="true"></i> Car</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link active" href="services.php"><i class="fa fa-wrench" aria-hidden="true"></i> Service</a>
+					<a class="nav-link" href="services.php"><i class="fa fa-wrench" aria-hidden="true"></i> Service</a>
 				</li>
 
 				<li class="nav-item dropdown ml-md-auto">
@@ -130,13 +167,13 @@ $tar= date("Y-m-d");?>
 						}
 						?>
 						<a class="dropdown-item" href="password.php"><i class="fa fa-key" aria-hidden="true"></i> Change Password</a>
-						<?php
-						if ($_SESSION ['question']==NULL){
-						?>
-						<a class="dropdown-item" href="question.php"><i class="fa fa-lock" aria-hidden="true"></i> Security Question</a>
-						<?php
-					}
-					?>
+            <?php
+            if ($_SESSION ['question']==NULL){
+            ?>
+            <a class="dropdown-item" href="question.php"><i class="fa fa-lock" aria-hidden="true"></i> Security Question</a>
+            <?php
+          }
+          ?>
 						<div class="dropdown-divider">
 						</div> <a class="dropdown-item" href="logout.php" onClick="return confirm('Are you sure?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
 					</div>
@@ -145,146 +182,25 @@ $tar= date("Y-m-d");?>
 		</div>
 	</div>
 	<br>
-	<div class="row">
-		<div class="col-md-4">
-			<form action="" method="post" role="form">
-				<div class="form-group">
-					 
-					<label for="service">
-						Service: <span style="color:red;">*</span>
-					</label>
-					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="service" type="text" maxlength="50" required>
-
+<div class="row">
+				<div class="col-md-4">
 				</div>
-				<!-- <div class="form-group">
-					 
-					<label for="exampleInputPassword1">
-						Password
-					</label>
-					<input type="password" class="form-control" id="exampleInputPassword1">
-				</div>
-				<div class="form-group">
-					 
-					<label for="exampleInputFile">
-						File input
-					</label>
-					<input type="file" class="form-control-file" id="exampleInputFile">
-					<p class="help-block">
-						Example block-level help text here.
-					</p>
-				</div> -->
-				<div class="checkbox">
-				<label for="type">Service Type: <span style="color:red;">*</span></label>
-  <select class="form-control" name="type" required>
-  	<option></option>
-    <option value="Exterior">Exterior</option>
-    <option value="Interior">Interior</option>
-
-  </select><br><br>
-  
-				
-					
-				</div> 
-				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+				<div class="col-md-4">
+					<form action="" method="post">
+						<div class="form-group">
+							 <span style="margin:auto; display:table; font-weight:bold;">Security Question</span><br>
+							<label for="question">
+								What was the name of the hospital that you were born? (Case-sensitive)
+							</label>
+							<input type="text" class="form-control" name="question" maxlength="50"/>
+						</div>
+						
+						<button type="submit" name="submit" class="btn btn-info">Submit <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
 				</button>
-				
-			</form>
-			<br>
-
-		</div>
-
-		<div class="col-md-8" style="overflow-y:auto;height: 500px">
+					</form>
+				</div>
+				<div class="col-md-4">
+				</div>
+			</div>
 			
-			<table class="table table-striped table-hover">
-				<thead>
-					<tr>
-						<th>
-							Service
-						</th>
-						<th>
-							Type
-						</th>
-						<th style="text-align:center">
-							Action
-						</th>
-					</tr>
-				</thead>
-				<tbody class="table-warning">
-		<?php
-		$tar= date("Y-m-d");
-		  $sql = "select * from service ORDER BY type ASC, service_id";
-					$result = mysqli_query($connect,$sql);
-					$x = 1;
-					if(mysqli_num_rows($result) > 0 )
-					{
-					while($row = mysqli_fetch_array($result))
-					{
-			?>
-			
-					
-
-						<td>
-							<?php echo $row['service_type'];?>
-						</td>
-						<td>
-							<?php echo $row['type'];?>
-						</td>
-
-					<td style="text-align:center">
-					<a href="deleteservice.php?serviceid=<?php echo $row['service_id'];?>" 
-					onclick="return confirm('Delete from service?')" class="danger" style="color: red; "><i class="fa fa-times fa-lg" aria-hidden="true"></i>
-						</button>
-
-						<!-- <a href="update.php?queue_id=<?php //echo $row['queue_id'];?>"><i class="fa fa-window-close" aria-hidden="true"></i> --></td>
-				</tr>
-				</form>
-				<?php
-				}
-					}
-				?>
-				
-					
-				</tbody>
-			</table>
-		</div>
-	</div>
-</div>
-<?php
-
-if(isset($_POST['submit'])){
-	$service=$_POST['service'];
-	$type=$_POST['type'];
-
-
-
-	
-	$sql = "INSERT INTO `service`(`service_type`, `type`) VALUES ('$service','$type')";
-	$result = mysqli_query($connect, $sql);
-
-	if($result == TRUE){
-				echo '<script language="javascript">';
-				echo 'alert("Service added.");';
-				echo 'window.location.href="services.php";';
-				echo '</script>';
-			}else{
-				echo '<script language="javascript">';
-				echo 'alert("Data is already present! Avoid duplicate entry.");';
-				echo 'window.location.href="services.php";';
-				echo '</script>';
-			}
-
-			mysqli_close($connect);
-
-}
-?>
-
-<!--     <script src="js/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/scripts.js"></script> -->
-    <script>
-    	$('select').selectpicker();
-    </script>
-
-  </body>
-</html>
+</div></body></html>
