@@ -22,7 +22,24 @@ session_start();
     $newpass = $_POST['newpassword'];
     $confirm = $_POST['retypepassword'];
     
-  if($pass == $oldpass && $newpass == $confirm){  
+  if($pass == $oldpass && $newpass == $confirm){ 
+    if (strlen($newpass) < '8') {
+        echo "<script>alert('Password needs to be at least 8 characters.');</script>";
+        echo "<meta http-equiv='refresh' content='0; url=password.php'/>";
+    }
+    elseif(!preg_match("#[0-9]+#",$newpass)) {
+        echo "<script>alert('Your Password Must Contain At Least 1 Number!');</script>";
+        echo "<meta http-equiv='refresh' content='0; url=password.php'/>";
+    }
+    elseif(!preg_match("#[A-Z]+#",$newpass)) {
+        echo "<script>alert('Your Password Must Contain At Least 1 Capital Letter!');</script>";
+        echo "<meta http-equiv='refresh' content='0; url=password.php'/>";
+
+    }
+    elseif(!preg_match("#[a-z]+#",$newpass)) {
+        echo "<script>alert('Your Password Must Contain At Least 1 Lowercase Letter!');</script>";
+        echo "<meta http-equiv='refresh' content='0; url=password.php'/>";
+    }else{
     
   $sql = "UPDATE staff 
           SET password = '$confirm' 
@@ -32,6 +49,7 @@ session_start();
 
   echo "<script>alert('Password updated.');</script>";
   echo "<meta http-equiv='refresh' content='0; url=password.php'/>";
+}
   
   }
 
@@ -255,21 +273,21 @@ $tar= date("Y-m-d");?>
 							<label for="oldpassword">
 								Old Password:
 							</label>
-							<input type="password" class="form-control" id="oldpassword" name="oldpassword" maxlength="8"/>
+							<input type="password" class="form-control" id="oldpassword" name="oldpassword" maxlength="15"/>
 						</div>
 						<div class="form-group">
 							 
 							<label for="newpassword">
 								New Password:
 							</label>
-							<input type="password" class="form-control" id="newpassword" name="newpassword" maxlength="8" />
+							<input type="password" class="form-control" id="newpassword" name="newpassword" maxlength="15" />
 						</div>
 						<div class="form-group">
 							 
 							<label for="retypepassword">
 								Retype Password:
 							</label>
-							<input type="password" class="form-control" id="retypepassword" name="retypepassword" maxlength="8" />
+							<input type="password" class="form-control" id="retypepassword" name="retypepassword" maxlength="15" />
 						</div>
 						<div id="message">
                     <h5>Password must contain the following:</h5>
