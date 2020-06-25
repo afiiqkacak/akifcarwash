@@ -51,23 +51,20 @@ $('#divToRefresh').load('dbcheck.php');
 				<br>
 				<img align="center" src="akif.png" height="50" width="150"/>
 				<h1>
-					<small>CAR 'Q'</small>
+					Don't worry, your car is in the hands of the professionals!
 				</h1>
 <?php
 date_default_timezone_set('Asia/Kuala_Lumpur');
 $datenow = date("l, d F Y");
 $timenow = date("g:i a", time());
 ?>
-<h4><?php echo $datenow ?>
-<?php echo "\n" ?>
-<?php echo $timenow;
+<h4>
 $tar= date("Y-m-d");
 ?>
 
 
 
 </h4></div>
-<marquee class="marquee" scrollamount="10"><h5>It's our pleasure to extend a cheerful welcome to you all! Your presence makes us very happy!</h5></marquee>
 						
 <br>
 
