@@ -80,12 +80,17 @@ $tar= date("Y-m-d");
 			<table class="table">
 				<thead>
 					<tr>
-						<th style="text-align:center">
+						<th style="text-align:center; font-size:30px;">
 							Queuing <i class="fa fa-car" aria-hidden="true"></i>
 						</th>
 					</tr>
 				</thead>
 				<tbody class="table-danger" id="liveData3">
+					<tr>
+
+						<td style="text-align:center; font-size:30px;">
+						</td>
+					</tr>
 				</tbody>
 				
 			</table>
@@ -94,7 +99,7 @@ $tar= date("Y-m-d");
 			<table class="table">
 				<thead>
 					<tr>
-						<th style="text-align:center">
+						<th style="text-align:center; font-size:30px;">
 							In progress <i class="fa fa-wrench" aria-hidden="true"></i>
 						</th>
 					</tr>
@@ -102,7 +107,7 @@ $tar= date("Y-m-d");
 				<tbody class="table-active" id="liveData2">
 					<tr>
 
-						<td style="text-align:center">
+						<td style="text-align:center; font-size:30px;">
 						</td>
 					</tr>
 				</tbody>
@@ -114,7 +119,7 @@ $tar= date("Y-m-d");
 			<table class="table">
 				<thead>
 					<tr>
-						<th style="text-align:center">
+						<th style="text-align:center; font-size:30px;">
 							Completed <i class="fa fa-check-square-o" aria-hidden="true"></i>
 						</th>
 					</tr>
@@ -123,7 +128,7 @@ $tar= date("Y-m-d");
 				<tbody class="table-warning" id="liveData">
 					<tr>
 
-						<td style="text-align:center">
+						<td style="text-align:center; font-size:30px;">
 						</td>
 					</tr>
 				</tbody>
