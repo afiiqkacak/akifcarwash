@@ -85,10 +85,10 @@ $tar= date("Y-m-d");
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-danger" id="liveData3">
+				<tbody class="table-danger" id="liveData3" style="text-align:center; font-size:30px;">
 					<tr>
 
-						<td style="text-align:center; font-size:30px;">
+						<td style="text-align:center;">
 						</td>
 					</tr>
 				</tbody>
@@ -104,10 +104,10 @@ $tar= date("Y-m-d");
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-active" id="liveData2">
+				<tbody class="table-active" id="liveData2" style="text-align:center; font-size:30px;">
 					<tr>
 
-						<td style="text-align:center; font-size:30px;">
+						<td style="text-align:center;">
 						</td>
 					</tr>
 				</tbody>
@@ -125,10 +125,10 @@ $tar= date("Y-m-d");
 					</tr>
 					
 				</thead>
-				<tbody class="table-warning" id="liveData">
+				<tbody class="table-warning" id="liveData" style="text-align:center; font-size:30px;">
 					<tr>
 
-						<td style="text-align:center; font-size:30px;">
+						<td style="text-align:center;">
 						</td>
 					</tr>
 				</tbody>
