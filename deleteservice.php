@@ -5,7 +5,7 @@ include('connection/connect.php');
 $queueid = $_GET["serviceid"];
 
 
-	$sql = "DELETE FROM service WHERE service_id = '".$queueid."'";
+	$sql = "CALL `deleteService`('$queueid')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){

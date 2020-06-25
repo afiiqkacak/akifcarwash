@@ -259,7 +259,7 @@ if(isset($_POST['submit'])){
 
 
 	
-	$sql = "INSERT INTO `service`(`service_type`, `type`) VALUES ('$service','$type')";
+	$sql = "CALL `insertService`('$service','$type')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){

@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
 // echo $id;
 	// if($status=="Completed"){
 		
-	$sql = "UPDATE `staff` SET `phone_number`='$phone',`address`='$address', `role`='$role' WHERE staff_id='$id'";
+	$sql = "CALL `updateStaff`('$id', '$phone', '$address', '$role')";
 	 	mysqli_query($connect, $sql);
 	 	echo '<script language="javascript">';
 	 	echo 'alert("Staff profile updated.");';

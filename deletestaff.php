@@ -5,7 +5,7 @@ include('connection/connect.php');
 $queueid = $_GET["staffid"];
 
 
-	$sql = "DELETE FROM staff WHERE staff_id = '".$queueid."'";
+	$sql = "CALL `deleteStaff`('$queueid')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){

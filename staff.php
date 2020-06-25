@@ -320,7 +320,7 @@ if(isset($_POST['submit'])){
 	$role=$_POST['role'];
 
 	
-	$sql = "INSERT INTO `staff`(`ic`, `name`, `address`, `role`, `phone_number`) VALUES ('$ic','$name','$address','$role','$phone')";
+	$sql = "CALL `insertStaff`('$ic', '$name', '$address', '$role', '$phone')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){

@@ -308,7 +308,7 @@ if(isset($_POST['submit'])){
 
 
 	
-	$sql = "INSERT INTO `car`(`plate_num`, `car_model`, `car_colour`, `car_category_id`, `customer_id`) VALUES ('$plate','$model','$colour','$category','$name')";
+	$sql = "CALL `insertCar`('$plate', '$model', '$colour', '$category', '$name')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){

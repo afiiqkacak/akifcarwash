@@ -5,7 +5,7 @@ include('connection/connect.php');
 $queueid = $_GET["carid"];
 
 
-	$sql = "DELETE FROM car WHERE car_id = '".$queueid."'";
+	$sql = "CALL `deleteCar`('$queueid')";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){
