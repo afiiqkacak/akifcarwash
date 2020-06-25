@@ -49,7 +49,7 @@ $('#divToRefresh').load('dbcheck.php');
 		<div class="col-md-12">
 			<div class="page-header" align="center">
 				<br>
-				<img align="center" src="akif.png" height="50" width="150"/>
+				<img align="center" src="akif.png" height="150" width="300"/>
 				<h1 style="font-family: 'Georgia', Times, serif;">
 					Don't worry, your car is in the hands of the professionals!
 				</h1>
