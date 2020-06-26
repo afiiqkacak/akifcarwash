@@ -133,12 +133,12 @@ $tar= date("Y-m-d");?>
 				</div> -->
 
 				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</button> 
-				
+				</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<button class="btn btn-danger" value="PLAY" onclick="play()">Bell <i class="fa fa-bell" aria-hidden="true"></i></button>
 				
 			</form>
-			<br> <br>
-			<button class="btn btn-danger" value="PLAY" onclick="play()">Bell <i class="fa fa-bell" aria-hidden="true"></i></button>
+			<br>
+			
 
     			<audio id="audio" src="bell.mp3"></audio>
 			<br>
@@ -174,11 +174,11 @@ $tar= date("Y-m-d");?>
 						if($row['status'] == "Queuing"){
 							echo '<tr class="table-danger">';
 						}elseif($row['status'] == "In Progress"){
-							echo '<tr class="table-active">';
-						}elseif($row['status'] == "Completed"){
 							echo '<tr class="table-warning">';
-						}else{
+						}elseif($row['status'] == "Completed"){
 							echo '<tr class="table-success">';
+						}else{
+							echo '<tr class="table-active">';
 						}
 			?>
 			
