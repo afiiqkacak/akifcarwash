@@ -43,36 +43,7 @@ $('#divToRefresh').load('dbcheck.php');
 
 </head>
 
-<!-- <div id="liveData"> -->
-    <div class="container-fluid">
-	<div class="row" style="background-image: linear-gradient(to bottom right, #4fdce0,#9ad5fc );">
-		<div class="col-md-12">
-			<div class="page-header" align="center">
-				<br>
-				<img align="center" src="akif.png" height="50" width="150"/>
-				<h1>
-					<small>CAR 'Q'</small>
-				</h1>
-<?php
-date_default_timezone_set('Asia/Kuala_Lumpur');
-$datenow = date("l, d F Y");
-$timenow = date("g:i a", time());
-?>
-<h4><?php echo $datenow ?>
-<?php echo "\n" ?>
-<?php echo $timenow;
-$tar= date("Y-m-d");
-?>
 
-
-
-</h4></div>
-<marquee class="marquee" scrollamount="10"><h5>It's our pleasure to extend a cheerful welcome to you all! Your presence makes us very happy!</h5></marquee>
-						
-<br>
-
-</div>
-</div>
 
 <br>
 	<div class="row">
@@ -85,7 +56,7 @@ $tar= date("Y-m-d");
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-danger" id="liveData3">
+				<tbody class="table-danger" id="liveData3" style="text-align:center; font-size:30px;">
 				</tbody>
 				
 			</table>
@@ -99,7 +70,7 @@ $tar= date("Y-m-d");
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-active" id="liveData2">
+				<tbody class="table-active" id="liveData2" style="text-align:center; font-size:30px;">
 					<tr>
 
 						<td style="text-align:center">
@@ -120,7 +91,7 @@ $tar= date("Y-m-d");
 					</tr>
 					
 				</thead>
-				<tbody class="table-warning" id="liveData">
+				<tbody class="table-warning" id="liveData" style="text-align:center; font-size:30px;">
 					<tr>
 
 						<td style="text-align:center">
