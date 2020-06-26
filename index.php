@@ -133,12 +133,12 @@ $tar= date("Y-m-d");?>
 				</div> -->
 
 				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-				<button class="btn btn-danger" value="PLAY" onclick="play()">Bell <i class="fa fa-bell" aria-hidden="true"></i></button>
+				</button> 
+				
 				
 			</form>
-			<br>
-			
+			<br> <br>
+			<button class="btn btn-danger" value="PLAY" onclick="play()">Bell <i class="fa fa-bell" aria-hidden="true"></i></button>
 
     			<audio id="audio" src="bell.mp3"></audio>
 			<br>
