@@ -6,11 +6,6 @@ $session_lifetime = 3600 * 24 * 2; // 2 days
 session_set_cookie_params ($session_lifetime);
 session_start();
 	
-	if(isset($_SESSION["staff_id"])){
-			$user = $_SESSION["staff_id"];
-	}else{
-		header('Location: loginpage.php');
-	}
 	 include('connection/connect.php');
 
 
@@ -97,21 +92,9 @@ $tar= date("Y-m-d");?>
 			</div>
 			
 			<ul class="nav nav-tabs">
-				<li class="nav-item">
-					<a class="nav-link" href="dashboard.php"><i class="fa fa-tachometer" aria-hidden="true"></i> Dashboard</a>
-				</li>
+	
 				<li class="nav-item">
 					<a class="nav-link active" href="index.php"><i class="fa fa-hand-paper-o" aria-hidden="true"></i> Queue</a>
-				</li>
-				
-				<li class="nav-item">
-					<a class="nav-link" href="customer.php"><i class="fa fa-id-card-o" aria-hidden="true"></i> Customer</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="car.php"><i class="fa fa-car" aria-hidden="true"></i> Car</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="services.php"><i class="fa fa-wrench" aria-hidden="true"></i> Service</a>
 				</li>
 
 				<li class="nav-item dropdown ml-md-auto">
@@ -153,27 +136,8 @@ $tar= date("Y-m-d");?>
 						Plate Number: <span style="color:red;">*</span>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <select class="form-control" data-live-search="true" name="platenum" required>
-					 	<option></option>
-					 	<?php
-					 $sql2="SELECT * FROM car WHERE car_id NOT IN (SELECT car.car_id
-FROM `car` INNER JOIN queue 
-WHERE car.car_id=queue.car_id AND date='$tar')";
-					 $result2 = mysqli_query($connect, $sql2);
-					if (mysqli_num_rows($result2)) 
-					{
-						while($row2 = mysqli_fetch_array($result2)) 
-						{					
-					 ?>
-    <option value="<?php echo $row2['car_id'];?>"><?php echo $row2['plate_num'];?></option>
-<?php
-		}
-	
-	}
-?>
+					 <input class="form-control" name="platenum" required>
 					 	
-					 	</select>
-
 				</div>
 				<!-- <div class="form-group">
 					 
@@ -192,37 +156,9 @@ WHERE car.car_id=queue.car_id AND date='$tar')";
 						Example block-level help text here.
 					</p>
 				</div> -->
-				<div class="checkbox">
-				<label for="service">Select Service(s): <span style="color:red;">*</span></label>
-  <select class="form-control" multiple data-live-search="true" name="service[]" required>
-     <?php
-					 $sql="select * from service ORDER BY type ASC, service_id";
-					 $result = mysqli_query($connect, $sql);
-					if (mysqli_num_rows($result)) 
-					{
-						while($row = mysqli_fetch_array($result)) 
-						{					
-					 ?>
-    <option value="<?php echo $row['service_id'];?>"><?php echo $row['service_type'];?> (<?php echo $row['type'];?>)</option>
-<?php
-		}
-	
-	}
-	else
-	{
-		echo "0 result";
-	}
- 
- 
-// mysqli_close($connect);
-?>
-  </select><br><br>
-  
-				
-					
-				</div> 
+
 				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 				<button class="btn btn-danger" value="PLAY" onclick="play()">Bell <i class="fa fa-bell" aria-hidden="true"></i></button>
 				
 			</form>
@@ -306,9 +242,7 @@ echo $someString;
 				<tbody>
 		<?php
 		$tar= date("Y-m-d");
-		  $sql = "SELECT queue.queue_id, car.plate_num, queue.arrival_time, queue.completed_time, GROUP_CONCAT(service.service_type SEPARATOR'<br>') AS service, queue.status 
-FROM car JOIN queue JOIN queue_service JOIN service
-WHERE car.car_id=queue.car_id AND queue.queue_id=queue_service.queue_id AND queue_service.service_id=service.service_id AND queue.date LIKE '$tar' GROUP BY queue_id ORDER BY status DESC, queue_id ASC";
+		  $sql = "SELECT * FROM queue WHERE date LIKE '$tar' ORDER BY status DESC, queue_id ASC";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )
@@ -330,15 +264,6 @@ WHERE car.car_id=queue.car_id AND queue.queue_id=queue_service.queue_id AND queu
 
 						<td>
 							<?php echo $row['plate_num'];?>
-						</td>
-						<td>
-							<?php echo $row['arrival_time'];?>
-						</td>
-						<td>
-							<?php echo $row['completed_time'];?>
-						</td>
-						<td>
-							<?php echo $row['service'];?>
 						</td>
 						<td>
 							<form action="update.php" method="post">

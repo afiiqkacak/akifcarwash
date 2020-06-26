@@ -9,7 +9,7 @@ if(isset($_POST['status'])){
 
 	if($status=="Completed"){
 		
-		$sql = "UPDATE `queue` SET `status` = '$status', completed_time= '$time' WHERE `queue`.`queue_id` = '$queueid'";
+		$sql = "UPDATE `queue` SET `status` = '$status' WHERE `queue_id` = '$queueid'";
 		mysqli_query($connect, $sql);
 		echo '<script language="javascript">';
 		echo 'window.location.href="index.php";';
@@ -22,7 +22,7 @@ if(isset($_POST['status'])){
 
 
 
-	$sql = "UPDATE `queue` SET `status` = '$status' WHERE `queue`.`queue_id` = '$queueid'";
+	$sql = "UPDATE `queue` SET `status` = '$status' WHERE `queue_id` = '$queueid'";
 	$result = mysqli_query($connect, $sql);
 
 	if($result == TRUE){
