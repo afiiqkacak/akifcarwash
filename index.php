@@ -356,7 +356,7 @@ WHERE car.car_id=queue.car_id AND queue.queue_id=queue_service.queue_id AND queu
 	        		  }elseif ($row['status'] == "In Progress"){
 	        		  	?>
 							<option value="Queuing">Queuing</option>
-							<option value="Completed">Completed</option>
+							<option value="Completed"><audio src='bell.mp3' autoplay></audio>Completed</option>
 							<option value="Collected">Collected</option>
 	        		  
 	        		  <?php
