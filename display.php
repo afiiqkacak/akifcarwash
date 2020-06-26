@@ -70,7 +70,7 @@ $('#divToRefresh').load('dbcheck.php');
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-active" id="liveData2" style="text-align:center; font-size:40px;">
+				<tbody class="table-warning" id="liveData2" style="text-align:center; font-size:40px;">
 					<tr>
 
 						<td style="text-align:center">
@@ -91,7 +91,7 @@ $('#divToRefresh').load('dbcheck.php');
 					</tr>
 					
 				</thead>
-				<tbody class="table-warning" id="liveData" style="text-align:center; font-size:40px;">
+				<tbody class="table-success" id="liveData" style="text-align:center; font-size:40px;">
 					<tr>
 
 						<td style="text-align:center">
