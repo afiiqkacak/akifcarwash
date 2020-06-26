@@ -3,7 +3,7 @@ include('connection/connect.php');
 date_default_timezone_set('Asia/Kuala_Lumpur');	
 ?>			
 <tbody class="table-success">
-					<tr>
+					<tr class="table-success">
 						<?php
 					
 					$tar= date("Y-m-d");
