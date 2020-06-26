@@ -111,7 +111,7 @@ $tar= date("Y-m-d");?>
 						Plate Number: <span style="color:red;">*</span>
 					</label>
 					<!-- <input type="text" class="form-control" name="platenum"> -->
-					 <input class="form-control" name="platenum" required>
+					 <input class="form-control" name="platenum" id="someInput" required>
 					 	
 				</div>
 				<!-- <div class="form-group">
@@ -274,6 +274,12 @@ $tar= date("Y-m-d");?>
         var audio = document.getElementById("audio");
         audio.play();
       }
+    </script>
+<script>
+var someInput = document.querySelector('#someInput');
+someInput.addEventListener('input', function () {
+    someInput.value = someInput.value.toUpperCase();
+});
     </script>
     
 
