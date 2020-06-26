@@ -97,32 +97,7 @@ $tar= date("Y-m-d");?>
 					<a class="nav-link active" href="index.php"><i class="fa fa-hand-paper-o" aria-hidden="true"></i> Queue</a>
 				</li>
 
-				<li class="nav-item dropdown ml-md-auto">
-					 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown"><i class="fa fa-user-circle" aria-hidden="true"></i> <?php echo $_SESSION ['name']; ?></a>
-					<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-						<?php
-						if ($_SESSION ['role']=="Admin"){
-							?>
-						 <a class="dropdown-item" href="staff.php"><i class="fa fa-user-o" aria-hidden="true"></i> Staff</a> 
-						 <?php
-						}else{
-							?>
-						<a class="dropdown-item" href="profile.php"><i class="fa fa-user-o" aria-hidden="true"></i> Profile</a>
-						<?php
-						}
-						?>
-						<a class="dropdown-item" href="password.php"><i class="fa fa-key" aria-hidden="true"></i> Change Password</a>
-						<?php
-						if ($_SESSION ['question']==NULL){
-						?>
-						<a class="dropdown-item" href="question.php"><i class="fa fa-lock" aria-hidden="true"></i> Security Question</a>
-						<?php
-					}
-					?>
-						<div class="dropdown-divider">
-						</div> <a class="dropdown-item" href="logout.php" onClick="return confirm('Are you sure?')"><i class="fa fa-sign-out" aria-hidden="true"></i> Log Out</a>
-					</div>
-				</li>
+				
 			</ul>
 		</div>
 	</div>
@@ -167,51 +142,7 @@ $tar= date("Y-m-d");?>
 
     			<audio id="audio" src="bell.mp3"></audio>
 			<br>
-			<p>Legend:</p>
-<div class="foo queue"><p style="text-align:center;">Queuing<br/>
-<?php
-$que="SELECT COUNT(queue.status) AS status 
-FROM car INNER JOIN queue 
-WHERE car.car_id=queue.car_id AND queue.status='Queuing' AND queue.date LIKE '$tar' ORDER BY status DESC, queue_id ASC";
-$rque=mysqli_query($connect,$que);
-$row=mysqli_fetch_row($rque);
-$someString=implode("",$row);
-echo $someString;
-
-?></p></div>
-<div class="foo blue"><p style="text-align:center;">In Progress<br/>
-<?php
-$que="SELECT COUNT(queue.status) AS status 
-FROM car INNER JOIN queue 
-WHERE car.car_id=queue.car_id AND queue.status='In Progress' AND queue.date LIKE '$tar' ORDER BY status DESC, queue_id ASC";
-$rque=mysqli_query($connect,$que);
-$row=mysqli_fetch_row($rque);
-$someString=implode("",$row);
-echo $someString;
-
-?></p></div>
-<div class="foo completed"><p style="text-align:center;">Completed<br/>
-<?php
-$que="SELECT COUNT(queue.status) AS status 
-FROM car INNER JOIN queue 
-WHERE car.car_id=queue.car_id AND queue.status='Completed' AND queue.date LIKE '$tar' ORDER BY status DESC, queue_id ASC";
-$rque=mysqli_query($connect,$que);
-$row=mysqli_fetch_row($rque);
-$someString=implode("",$row);
-echo $someString;
-
-?></p></div>
-<div class="foo collected"><p style="text-align:center;">Collected<br/>
-<?php
-$que="SELECT COUNT(queue.status) AS status 
-FROM car INNER JOIN queue 
-WHERE car.car_id=queue.car_id AND queue.status='Collected' AND queue.date LIKE '$tar' ORDER BY status DESC, queue_id ASC";
-$rque=mysqli_query($connect,$que);
-$row=mysqli_fetch_row($rque);
-$someString=implode("",$row);
-echo $someString;
-
-?></p></div>
+			
 		</div>
 
 		<div class="col-md-8" style="overflow-y:auto;height: 500px">

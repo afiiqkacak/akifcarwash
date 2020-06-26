@@ -70,23 +70,23 @@ include('connection/connect.php');
 						$_SESSION ['password'] = $row ["password"];
 						$_SESSION ['question'] = $row ["question"];
 						echo "<script>alert('Welcome ".$_SESSION ['name']."!');</script>";
-						echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+						echo"<meta http-equiv='refresh' content='0; url=index.php'/>";
 						if ($_SESSION ['password'] == '123'){
 							echo "<script>alert('You are currently using the default password. Please change it ASAP.');</script>";
-							echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+							echo"<meta http-equiv='refresh' content='0; url=index.php'/>";
 							if($_SESSION ['question'] == NULL){
 							echo "<script>alert('Please update your security question.');</script>";
-							echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+							echo"<meta http-equiv='refresh' content='0; url=index.php'/>";
 							}
 						}elseif($_SESSION ['question'] == NULL){
 							echo "<script>alert('Please update your security question.');</script>";
-							echo"<meta http-equiv='refresh' content='0; url=dashboard.php'/>";
+							echo"<meta http-equiv='refresh' content='0; url=index.php'/>";
 						}
 
 					}
 					}else{
 						echo "<script>alert('Wrong IC or password.');</script>";
-						echo "<meta http-equiv='refresh' content='0; url=loginpage.php'/>";
+						echo "<meta http-equiv='refresh' content='0; url=index.php'/>";
 
 						}		
 			}

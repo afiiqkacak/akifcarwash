@@ -6,9 +6,9 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 					<tr>
 						<?php
 						$tar= date("Y-m-d");
-		  			$sql = "SELECT car.plate_num 
-					FROM car INNER JOIN queue 
-					WHERE car.car_id=queue.car_id AND queue.date LIKE '$tar' AND status='In Progress' ORDER BY status DESC, queue_id ASC";
+		  			$sql = "SELECT plate_num 
+					FROM queue 
+					WHERE date LIKE '$tar' AND status='In Progress' ORDER BY status DESC, queue_id ASC";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )

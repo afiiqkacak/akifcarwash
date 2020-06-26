@@ -49,23 +49,25 @@ $('#divToRefresh').load('dbcheck.php');
 		<div class="col-md-12">
 			<div class="page-header" align="center">
 				<br>
-				
-				<marquee><h1 style="font-family: 'Georgia', Times, serif;">
-					Don't worry, your car is in the hands of the professionals!
-					</h1></marquee>
+				<img align="center" src="akif.png" height="50" width="150"/>
+				<h1>
+					<small>CAR 'Q'</small>
+				</h1>
 <?php
 date_default_timezone_set('Asia/Kuala_Lumpur');
 $datenow = date("l, d F Y");
 $timenow = date("g:i a", time());
+?>
+<h4><?php echo $datenow ?>
+<?php echo "\n" ?>
+<?php echo $timenow;
 $tar= date("Y-m-d");
 ?>
 
 
 
-
-
-
-</div>
+</h4></div>
+<marquee class="marquee" scrollamount="10"><h5>It's our pleasure to extend a cheerful welcome to you all! Your presence makes us very happy!</h5></marquee>
 						
 <br>
 
@@ -83,12 +85,7 @@ $tar= date("Y-m-d");
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-danger" id="liveData3" style="text-align:center; font-size:30px;">
-					<tr>
-
-						<td style="text-align:center;">
-						</td>
-					</tr>
+				<tbody class="table-danger" id="liveData3">
 				</tbody>
 				
 			</table>
@@ -102,10 +99,10 @@ $tar= date("Y-m-d");
 						</th>
 					</tr>
 				</thead>
-				<tbody class="table-active" id="liveData2" style="text-align:center; font-size:30px;">
+				<tbody class="table-active" id="liveData2">
 					<tr>
 
-						<td style="text-align:center;">
+						<td style="text-align:center">
 						</td>
 					</tr>
 				</tbody>
@@ -123,10 +120,10 @@ $tar= date("Y-m-d");
 					</tr>
 					
 				</thead>
-				<tbody class="table-warning" id="liveData" style="text-align:center; font-size:30px;">
+				<tbody class="table-warning" id="liveData">
 					<tr>
 
-						<td style="text-align:center;">
+						<td style="text-align:center">
 						</td>
 					</tr>
 				</tbody>
@@ -135,9 +132,6 @@ $tar= date("Y-m-d");
 	</div>
 	<div class="row">
 
-		<div class="col-md-12" id="divToRefresh">
-				
-		</div>
 	</div>
 	<div class="row">
 		<div class="col-md-12" id="check">

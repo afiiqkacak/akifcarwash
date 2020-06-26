@@ -11,9 +11,9 @@ if(isset($_POST['submit'])){
 
 	// echo $pele;
 
-	$sql="INSERT INTO `queue`(`date`,`status`,`plate_num`) VALUES ('$time','$date','Queuing','$platenum')";
+	$sql="INSERT INTO `queue`(`status`,`plate_num`,`date`) VALUES ('Queuing','$platenum','$date')";
 	
-		$result=mysqli_query($connect, $sql);
+		mysqli_query($connect, $sql);
 
   		
 
@@ -27,7 +27,6 @@ if(isset($_POST['submit'])){
 		echo 'alert("'.$platenum.' is now in queue.");';
 		echo 'window.location.href="index.php";';
 		echo '</script>';
-	}
 
 
 // } else {
