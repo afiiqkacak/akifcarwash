@@ -13,7 +13,7 @@ if(isset($_POST['submit'])){
 
 	$sql="INSERT INTO `queue`(`date`,`status`,`plate_num`) VALUES ('$time','$date','Queuing','$platenum')";
 	
-		mysqli_query($connect, $sql);
+		$result=mysqli_query($connect, $sql);
 
   		
 
