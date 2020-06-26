@@ -3,7 +3,7 @@ include('connection/connect.php');
 date_default_timezone_set('Asia/Kuala_Lumpur');	
 ?>	
 				<tbody  class="table-warning">
-					<tr>
+					<tr class="table-warning">
 						<?php
 						$tar= date("Y-m-d");
 		  			$sql = "SELECT plate_num 
