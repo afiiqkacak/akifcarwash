@@ -49,10 +49,10 @@ $('#divToRefresh').load('dbcheck.php');
 		<div class="col-md-12">
 			<div class="page-header" align="center">
 				<br>
-				<img align="center" src="akif.png" height="150" width="300"/>
-				<h1 style="font-family: 'Georgia', Times, serif;">
+				
+				<marquee><h1 style="font-family: 'Georgia', Times, serif;">
 					Don't worry, your car is in the hands of the professionals!
-				</h1>
+					</h1></marquee>
 <?php
 date_default_timezone_set('Asia/Kuala_Lumpur');
 $datenow = date("l, d F Y");
