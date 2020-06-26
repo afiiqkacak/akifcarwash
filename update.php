@@ -11,6 +11,7 @@ if(isset($_POST['status'])){
 		
 		$sql = "UPDATE `queue` SET `status` = '$status', completed_time= '$time' WHERE `queue`.`queue_id` = '$queueid'";
 		mysqli_query($connect, $sql);
+		echo "<audio src='bell.mp3' autoplay hidden></audio>";
 		echo '<script language="javascript">';
 		echo 'window.location.href="index.php";';
 		echo '</script>';
