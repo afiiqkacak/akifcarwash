@@ -223,15 +223,6 @@ echo $someString;
 							Plate Number
 						</th>
 						<th>
-							Arrival Time
-						</th>
-						<th>
-							Completed Time
-						</th>
-						<th>
-							Service(s)
-						</th>
-						<th>
 							Status
 						</th>
 						<th style="text-align:center" colspan="2">
