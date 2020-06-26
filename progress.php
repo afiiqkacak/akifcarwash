@@ -8,7 +8,7 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 						$tar= date("Y-m-d");
 		  			$sql = "SELECT plate_num 
 					FROM queue 
-					WHERE date LIKE '$tar' AND status='In Progress' ORDER BY status DESC, queue_id ASC";
+					WHERE date LIKE '$tar' AND status='In Progress' ORDER BY status DESC, queue_id DESC";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 					if(mysqli_num_rows($result) > 0 )

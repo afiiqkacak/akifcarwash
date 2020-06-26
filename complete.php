@@ -2,14 +2,14 @@
 include('connection/connect.php');
 date_default_timezone_set('Asia/Kuala_Lumpur');	
 ?>			
-<tbody class="table-warning">
+<tbody class="table-success">
 					<tr>
 						<?php
 					
 					$tar= date("Y-m-d");
 		  			$sql = "SELECT plate_num 
 					FROM queue 
-					WHERE date LIKE '$tar' AND status='Completed' ORDER BY status DESC, queue_id ASC";
+					WHERE date LIKE '$tar' AND status='Completed' ORDER BY status DESC, queue_id DESC";
 					$result = mysqli_query($connect,$sql);
 					$x = 1;
 
