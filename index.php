@@ -222,9 +222,14 @@ WHERE car.car_id=queue.car_id AND date='$tar')";
 					
 				</div> 
 				<button type="submit" name="submit" class="btn btn-info">Insert <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-				</button>
+				</button> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+				<button class="btn btn-danger" value="PLAY" onclick="play()">Bell <i class="fa fa-bell" aria-hidden="true"></i></button>
 				
 			</form>
+			<br>
+			
+
+    			<audio id="audio" src="bell.mp3"></audio>
 			<br>
 			<p>Legend:</p>
 <div class="foo queue"><p style="text-align:center;">Queuing<br/>
@@ -315,7 +320,6 @@ WHERE car.car_id=queue.car_id AND queue.queue_id=queue_service.queue_id AND queu
 						}elseif($row['status'] == "In Progress"){
 							echo '<tr class="table-active">';
 						}elseif($row['status'] == "Completed"){
-							echo "<audio src='bell.mp3' autoplay hidden></audio>";
 							echo '<tr class="table-warning">';
 						}else{
 							echo '<tr class="table-success">';
@@ -396,6 +400,7 @@ WHERE car.car_id=queue.car_id AND queue.queue_id=queue_service.queue_id AND queu
 						<!-- <a href="update.php?queue_id=<?php //echo $row['queue_id'];?>"><i class="fa fa-window-close" aria-hidden="true"></i> --></td>
 				</tr>
 				</form>
+				
 				<?php
 				}
 					}
@@ -414,6 +419,15 @@ WHERE car.car_id=queue.car_id AND queue.queue_id=queue_service.queue_id AND queu
     <script>
     	$('select').selectpicker();
     </script>
+
+    <script>
+    	
+      function play() {
+        var audio = document.getElementById("audio");
+        audio.play();
+      }
+    </script>
+    
 
   </body>
 </html>
