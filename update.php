@@ -6,7 +6,6 @@ $time = date("H:i:s");
 if(isset($_POST['status'])){
 	$plate=$_POST['plate'];
 	$queueid = $_POST['queueid'];
-	$status = $_POST['status'];
 	$sql="SELECT plate_num from queue WHERE queue_id='$queue'";
 	$result=mysqli_query($connect, $sql);
 	$row=mysqli_fetch_array($result);
@@ -18,6 +17,12 @@ if(isset($_POST['status'])){
 		echo 'window.location.href="index.php";';
 		echo '</script>';
 	}
+	
+	$status = $_POST['status'];
+	$queueid = $_POST['queueid'];
+	
+	
+	
 		
 	
 	
