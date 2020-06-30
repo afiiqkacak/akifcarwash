@@ -4,8 +4,24 @@ date_default_timezone_set('Asia/Kuala_Lumpur');
 $time = date("H:i:s");
 
 if(isset($_POST['status'])){
+	$plate=$_POST['plate'];
 	$queueid = $_POST['queueid'];
 	$status = $_POST['status'];
+	$sql="SELECT plate_num from queue WHERE queue_id='$queue'";
+	$result=mysqli_query($connect, $sql);
+	$row=mysqli_fetch_array($result);
+	
+	if($plate != $row){
+		$sql = "UPDATE `queue` SET `plate_num` = '$plate' WHERE `queue_id` = '$queueid'";
+		mysqli_query($connect, $sql);
+		echo '<script language="javascript">';
+		echo 'window.location.href="index.php";';
+		echo '</script>';
+	}
+		
+	
+	
+	
 
 	if($status=="Completed"){
 		
