@@ -184,7 +184,7 @@ $tar= date("Y-m-d");?>
 			?>
 			
 					
-						<form action="update.php" method="post">
+						
 						<td>
 							<input name="plate" type="text" class= "form-control" value="<?php echo $row['plate_num'];?>" />
 						</td>
@@ -192,7 +192,7 @@ $tar= date("Y-m-d");?>
 							
 					<!-- <tr class="table-warning"> -->
 
-					
+							<form action="update.php" method="post">
 							<input name="queueid" autofocus class="input" type="hidden" value="<?php echo $row['queue_id']; ?>">
 							<select class="form-control" name="status" onchange="this.form.submit()">
 							<option><?php echo $row['status'];?></option>
