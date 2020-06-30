@@ -186,7 +186,12 @@ $tar= date("Y-m-d");?>
 					
 						
 						<td>
-							<input name="plate" type="text" class= "form-control" value="<?php echo $row['plate_num'];?>" />
+							<form action="update.php" method="post">
+							<input name="queueid" autofocus class="input" type="hidden" value="<?php echo $row['queue_id']; ?>">
+							<input name="plate" type="text" class= "form-control" value="<?php echo $row['plate_num'];?>" id="someInput" />
+							<button type="submit" name="submit" class="btn btn-info">Update <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+							</button>
+							</form>
 						</td>
 						<td>
 							
