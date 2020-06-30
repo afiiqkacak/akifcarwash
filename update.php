@@ -10,7 +10,7 @@ if(isset($_POST['status'])){
 	$result=mysqli_query($connect, $sql);
 	$row=mysqli_fetch_array($result);
 	
-	if($plate != $row){
+	if($plate != $row['plate_num']){
 		$sql = "UPDATE `queue` SET `plate_num` = '$plate' WHERE `queue_id` = '$queueid'";
 		mysqli_query($connect, $sql);
 		echo '<script language="javascript">';
