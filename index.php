@@ -184,12 +184,12 @@ $tar= date("Y-m-d");?>
 			?>
 			
 					
-
+						<form action="update.php" method="post">
 						<td>
-							<?php echo $row['plate_num'];?>
+							<input name="plate" type="text" class= "form-control" value="<?php echo $row['plate_num'];?>" />
 						</td>
 						<td>
-							<form action="update.php" method="post">
+							
 					<!-- <tr class="table-warning"> -->
 
 					
